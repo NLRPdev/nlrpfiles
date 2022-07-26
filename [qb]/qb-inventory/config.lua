@@ -12,7 +12,7 @@ Config.BinObjects = {
     "prop_bin_05a",
 }
 
-Config.CraftingObject = `prop_toolchest_05`
+Config.CraftingObject = ``
 
 Config.VendingItem = {
     [1] = {
