@@ -170,7 +170,7 @@ Config.jobs = {
 
 -- Here is the definition of the drivers that are generated for the players to hire
 Config.drivers = {
-	['cooldown'] = 30,							-- Cooldown time (in minutes) to generate a new driver
+	['cooldown'] = 60,							-- Cooldown time (in minutes) to generate a new driver
 	
 	['hiring_costs'] = {						-- Cost of hiring the driver (this amount will only be paid at the time of hiring)
 		['min'] = 1000,							-- This is the minimum base cost of hiring the employee
@@ -190,16 +190,16 @@ Config.drivers = {
 		{img = "https://bootdey.com/img/Content/avatar/avatar1.png", names = {"Bennett Stevens","Mcmillan Calhoun","Paula Blanchard","Roberson Holman","Frost Woods","Drake Boyd","Maricela Long","Hess Guerrero","Martha Adams","Simmons Ramsey","Medina Pitts","Hazel Tyson","Mia Nguyen","Clare Shannon","Kristy Dorsey","Hilda Cochran","Sandy Zimmerman","Petra Lowery","Opal Collier","Velez Terry","Mccormick Hewitt","Weeks Garner","Ashley Byers","Guzman Blackburn","Ramona Stanley","Delia Ratliff","Talley Rodriquez","Ochoa Hayden","Thelma Stout","Lloyd Clarke","Gordon Gould","Aida Noel","Corinne Richmond","Malone Walls","Shields Bowen","Howell Harper","Figueroa Schwartz","Rachel Delgado","Debora Chaney","Chen Avery","Kidd Fitzgerald","Aguirre Park","Combs Cruz","Huff Thompson","Munoz Crosby","Whitaker Mason","Oneil York","Francis Houston","Prince White","Cornelia Bell"}}
 	},
 	['max_active_drivers'] = 20,				-- Maximum number of drivers that can be active, this means that when generating a driver that exceeds this number, the oldest driver will be deleted
-	['max_drivers_per_player'] = 5				-- Maximum number of drivers the player can hire
+	['max_drivers_per_player'] = 3				-- Maximum number of drivers the player can hire
 }
 
 -- Here is the definition of the contracts that are generated for drivers to carry out
 Config.driver_jobs = {
-	['cooldown'] = 30,							-- Cooldown time (in minutes) for drivers to make contracts and generate money for the company
+	['cooldown'] = 120,							-- Cooldown time (in minutes) for drivers to make contracts and generate money for the company
 
 	['profit'] = {								-- These are the drivers' earnings for each contract, a random value is generated for each contract
-		['min'] = 1000,							-- Minimum base profit, this will be the minimum money this driver can generate
-		['max'] = 1100,							-- Maximum base profit, this will be the maximum amount of money this driver can generate (this amount will increase according to the driver's skills)
+		['min'] = 2000,							-- Minimum base profit, this will be the minimum money this driver can generate
+		['max'] = 3000,							-- Maximum base profit, this will be the maximum amount of money this driver can generate (this amount will increase according to the driver's skills)
 		['percentage_skills'] = 15,				-- This is the % value that each skill will add to the driver's final profit. That is, the more skills he has, the greater the profit.
 	},
 
