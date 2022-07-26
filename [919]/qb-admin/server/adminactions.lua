@@ -109,7 +109,7 @@ RegisterNetEvent("919-admin:server:BanPlayer", function(player, time, reason, ci
                                 args = {result[1].name, GetPlayerName(src), time / 60 / 60, reason}
                             })
                         end
-                        TriggerEvent("qb-log:server:CreateLog", "bans", "Player Banned", "red", string.format("%s was banned by %s for %s (%s hours)", result[1].name, GetPlayerName(src), reason, time / 60 / 60), true)
+                        TriggerEvent("qb-log:server:CreateLog", "bans", "Player Banned", "red", string.format("%s was banned by %s for %s (%s hours)", result[1].name, GetPlayerName(src), reason, time / 60 / 60), Config.TagEveryone)
                     end
                 else
                     DebugTrace("Offline ban citizenid had no results. CitizenID: " .. citizenid)
@@ -144,7 +144,7 @@ AdminPanel.OnlineBanPlayer = function(source, player, time, timeTable, reason)
             args = {GetPlayerName(player), GetPlayerName(src), time / 60 / 60, reason}
         })
     end
-    TriggerEvent("qb-log:server:CreateLog", "bans", "Player Banned", "red", string.format("%s was banned by %s for %s (%s hours)", GetPlayerName(player), GetPlayerName(src), reason, time / 60 / 60), true)
+    TriggerEvent("qb-log:server:CreateLog", "bans", "Player Banned", "red", string.format("%s was banned by %s for %s (%s hours)", GetPlayerName(player), GetPlayerName(src), reason, time / 60 / 60), Config.TagEveryone)
     if banTime >= 2147483647 then
         DropPlayer(player, "You have been banned:\n" .. reason .. "\n\nYour ban is permanent.\n🔸 Check our Discord for more information: " .. Config.ServerDiscord)
     else
@@ -177,7 +177,7 @@ RegisterNetEvent("919-admin:server:WarnPlayer", function(player, reason, citizen
                             GetPlayerName(src)
                         })
                         TriggerClientEvent("919-admin:client:ShowPanelAlert", src, "success", "<strong>SUCCESS:</strong> Warned " .. result[1].name .. " (OFFLINE).")
-                        TriggerEvent("qb-log:server:CreateLog", "warns", "Player Warned", "red", string.format("%s was warned by %s for %s", result[1].name, GetPlayerName(src), reason), true)
+                        TriggerEvent("qb-log:server:CreateLog", "warns", "Player Warned", "red", string.format("%s was warned by %s for %s", result[1].name, GetPlayerName(src), reason), false)
                     end
                 else
                     DebugTrace("Offline warning citizenid had no results. CitizenID: " .. citizenid)
@@ -198,7 +198,7 @@ AdminPanel.OnlineWarnPlayer = function(source, player, reason)
         GetPlayerName(src)
     })
     TriggerClientEvent("919-admin:client:ShowPanelAlert", src, "success", "<strong>SUCCESS:</strong> Warned " .. GetPlayerName(player) .. ".")
-    TriggerEvent("qb-log:server:CreateLog", "warns", "Player Warned", "red", string.format("%s was warned by %s for %s", GetPlayerName(player), GetPlayerName(src), reason), true)
+    TriggerEvent("qb-log:server:CreateLog", "warns", "Player Warned", "red", string.format("%s was warned by %s for %s", GetPlayerName(player), GetPlayerName(src), reason), false)
     TriggerClientEvent("919-admin:client:WarnPlayer", player, GetPlayerName(src), reason)
 end
 
@@ -807,12 +807,16 @@ RegisterServerEvent("919-admin:server:SaveAdminMenuSetting", function(setting, v
     local Player = QBCore.Functions.GetPlayer(src)
     value = tonumber(value)
     if Player then
+        print('Found ya')
         if AdminPanel.HasPermission(src, "adminmenu") then
+            print('u have perms')
             if setting == "darkmode" then
                 if value == 1 or value == 0 then
+                    print('Its value')
                     Player.Functions.SetMetaData("adminpanel_darkmode", value)
                     DebugTrace("[919-admin:server:SaveAdminMenuSetting] Set metadata adminpanel_darkmode to " .. value)
                     DarkMode[src] = value
+                    print(value)
                 else
                     DebugTrace("[919-admin:server:SaveAdminMenuSetting] Invalid setting value")
                 end

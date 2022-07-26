@@ -1558,6 +1558,9 @@ AdminPanel.Init = function() {
 
     $('#warningsmodal').on('hidden.bs.modal', function () {
         AdminPanel.ModalOpen = false;
+        setTimeout(() => {
+            $('.reportbox').css('display', 'none'); 
+        }, 100);
     });
 
     $('#reportmodal').on('hidden.bs.modal', function () {
@@ -1931,7 +1934,7 @@ AdminPanel.ResetBansList = function() {
             <td>${item.IP}</td>
             <td>${item.Reason}</td>
             <td>${item.BannedBy}</td>
-            <td>${item.Expire}</td>
+            <td>${AdminPanel.GetReadableTime(item.Expire)}</td>
             <td>
             <a href="#" id="banlistunban" data-name="${item.Name}" data-license="${item.License}" data-toggle="tooltip" title="Unban Player" class="h4"><i class="fas fa-gavel"></i></a> 
             <td>
@@ -2359,6 +2362,9 @@ AdminPanel.ViewWarnings = function(warnings) {
         });
         AdminPanel.ModalOpen = true;
         $("#warningsmodal").modal('show');
+        setTimeout(() => {
+            $('.reportbox').css('display', 'none'); 
+        }, 100);
     }
 }
 

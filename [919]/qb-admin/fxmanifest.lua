@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Sinatra#0101'
 description '919DESIGN Admin Panel'
-version '1.5.0'
+version '1.5.1'
 lua54 'yes'
 
 ui_page 'html/index.html'

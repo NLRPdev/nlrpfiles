@@ -1,5 +1,6 @@
-QBCore = exports['qb-core']:GetCoreObject()
+QBCore = Config.CoreExport
 PlayerList = {}
+PlayerListCache = {}
 ServerInformation = {
     StaffCount = nil,
     CharacterCount = nil,
@@ -8,6 +9,7 @@ ServerInformation = {
 }
 SettingsLoaded = {}
 DarkMode = {}
+LoadedRole = {}
 SeeThrough = {}
 
 AdminPanel = {}
@@ -664,25 +666,25 @@ AdminPanel.GetAllPlayers = function()
     ServerInformation.PlayerList = {}
     ServerInformation.StaffCount = 0
     for k,v in ipairs(QBCore.Functions.GetPlayers()) do
-        local Player = QBCore.Functions.GetPlayer(v)
+        local Player = QBCore.Functions.GetPlayer(tonumber(v))
         if Player then
-            if not SettingsLoaded[v] then
+            if not SettingsLoaded[tonumber(v)] then
                 if Player.PlayerData.metadata['adminpanel_darkmode'] == nil then
                     Player.Functions.SetMetaData('adminpanel_darkmode', Config.DefaultDarkMode)
-                    DarkMode[v] = Config.DefaultDarkMode
+                    DarkMode[tonumber(v)] = Config.DefaultDarkMode
                 else
-                    DarkMode[v] = Player.PlayerData.metadata['adminpanel_darkmode']
+                    DarkMode[tonumber(v)] = Player.PlayerData.metadata['adminpanel_darkmode']
                 end
                 if Player.PlayerData.metadata['adminpanel_seethrough'] == nil then
                     Player.Functions.SetMetaData('adminpanel_seethrough', 0)
-                    SeeThrough[v] = 0
+                    SeeThrough[tonumber(v)] = 0
                 else
-                    SeeThrough[v] = Player.PlayerData.metadata['adminpanel_seethrough']
+                    SeeThrough[tonumber(v)] = Player.PlayerData.metadata['adminpanel_seethrough']
                 end
-                DebugTrace("Loaded panel settings for "..GetPlayerName(v))
+                DebugTrace("Loaded panel settings for "..GetPlayerName(tonumber(v)))
                 SettingsLoaded[v] = true
             end
-            local identifiers, steamIdentifier = GetPlayerIdentifiers(v)
+            local identifiers, steamIdentifier = GetPlayerIdentifiers(tonumber(v))
             for _, v2 in pairs(identifiers) do
                 if string.find(v2, "license:") then
                     steamIdentifier = v2
@@ -694,19 +696,20 @@ AdminPanel.GetAllPlayers = function()
                 end
             end
             local playerRole = "user"
-            if QBCore.Functions.HasPermission(v, "god") then 
+            if QBCore.Functions.HasPermission(tonumber(v), "god") then 
                 ServerInformation.StaffCount = ServerInformation.StaffCount + 1
                 playerRole = "god"
-            elseif QBCore.Functions.HasPermission(v, "admin") then 
+            elseif QBCore.Functions.HasPermission(tonumber(v), "admin") then 
                 ServerInformation.StaffCount = ServerInformation.StaffCount + 1
                 playerRole = "admin"
             end
+            LoadedRole[tonumber(v)] = playerRole
             table.insert(ServerInformation.PlayerList, 
                 {
                     id = v, 
                     name = GetPlayerName(v), 
                     identifiers = json.encode(identifiers), 
-                    role = playerRole,
+                    role = LoadedRole[v],
                     bank = '$'..comma_value(Player.PlayerData.money.bank),
                     cash = '$'..comma_value(Player.PlayerData.money.cash),
                     steamid = steamIdentifier,
@@ -736,8 +739,6 @@ end
 
 RegisterNetEvent('qb-admin:server:GetPlayersForBlips', function()
     local src = source
-    print('woosh')
-    print(json.encode(players))
     TriggerClientEvent('qb-admin:client:Show', src, players)
 end)
 

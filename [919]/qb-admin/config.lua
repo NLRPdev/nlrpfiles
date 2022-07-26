@@ -14,6 +14,7 @@ Config.ScreenshotWebhook                    = "https://discord.com/api/webhooks/
 
 Config.NoClipKey                            = "INSERT"
 Config.AdminPanelKey                        = "PAGEDOWN"
+Config.ShowNamesKey                         = "PAGEUP"
 
 Config.NoClipType                           = 1             -- 1 (default) NEW txAdmin-like NoClip system, or 2 for old style 919Admin NoClip system
 
@@ -28,9 +29,11 @@ Config.DB.VehiclesTable                     = "player_vehicles"
 Config.DB.CharactersTable                   = "players"
 Config.DB.BansTable                         = "bans"
 
-Config.AnnounceBan                          = true
+Config.AnnounceBan                          = true          -- Whether to announce bans in chat or not
+Config.TagEveryone                          = false         -- Enable to tag everyone in the discord log on ban
 
 Config.FuelScript                           = 'LegacyFuel'
+Config.CoreExport                           = exports["qb-core"]:GetCoreObject()
 
 Config.Permissions = {
     ["god"] = {
@@ -142,7 +145,7 @@ Config.Keys = {
 
 function DebugTrace(message)
     if Config.EnableDebug then
-        print("^3[919DESIGN QBCore Admin ("..GetCurrentResourceName()..")]^7 "..message)
+        print("^3[919DESIGN arpCore Admin ("..GetCurrentResourceName()..")]^7 "..message)
     end
 end
 

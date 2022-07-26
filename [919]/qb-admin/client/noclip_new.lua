@@ -1,10 +1,12 @@
 local noClipEnabled = false
 
 local freecamVeh = 0
-function toggleFreecam(enabled)
+function toggleFreecam(enabled, isInVis)
     noClipEnabled = enabled
     local ped = PlayerPedId()
-    SetEntityVisible(ped, not enabled)
+    if not isInVis then
+        SetEntityVisible(ped, not enabled)
+    end
     SetPlayerInvincible(ped, enabled)
     FreezeEntityPosition(ped, enabled)
 
