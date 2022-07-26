@@ -1,0 +1,142 @@
+{
+    "Paper Tray": {
+        "SearchTime": "25",
+        "PPos": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "GrabMin": 0,
+        "PRot": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "v_ret_gc_trays",
+        "GrabMax": 0,
+        "Weight": 100,
+        "Search": true,
+        "Tiny": "0.25",
+        "GrabItem": false,
+        "Grab": false,
+        "Carry": false
+    },
+    "Big Case": {
+        "SearchTime": "61.5",
+        "PPos": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "GrabMin": 0,
+        "PRot": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "ex_prop_adv_case",
+        "GrabMax": 0,
+        "Weight": 100,
+        "Search": false,
+        "Tiny": false,
+        "GrabItem": false,
+        "Grab": false,
+        "Carry": 0.25
+    },
+    "Monitor": {
+        "PPos": {
+            "X": 0,
+            "z": 0,
+            "y": 0
+        },
+        "GrabMin": 1,
+        "PRot": {
+            "X": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "ex_prop_monitor_01_ex",
+        "GrabMax": 1,
+        "Weight": 100,
+        "Search": false,
+        "Tiny": 1,
+        "GrabItem": "car-keys",
+        "Grab": false,
+        "Carry": "0.55"
+    },
+    "Gold Bar": {
+        "SearchTime": "63.5",
+        "PPos": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "GrabMin": "3",
+        "PRot": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "prop_gold_bar",
+        "GrabMax": "7",
+        "Weight": "305",
+        "Search": false,
+        "Tiny": "0.3",
+        "GrabItem": "bread",
+        "Grab": true,
+        "Carry": false
+    },
+    "Case": {
+        "SearchTime": 40,
+        "PPos": {
+            "x": 0,
+            "z": "0.5",
+            "y": 0
+        },
+        "GrabMin": 0,
+        "PRot": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "bkr_prop_biker_case_shut",
+        "GrabMax": 0,
+        "Weight": "385",
+        "Search": false,
+        "Tiny": 0.45,
+        "GrabItem": false,
+        "Grab": false,
+        "Carry": 0.6
+    },
+    "Weed Bag": {
+        "SearchTime": 30,
+        "PPos": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "GrabMin": "2",
+        "PRot": {
+            "x": 0,
+            "z": 0,
+            "y": 0
+        },
+        "Model": "bkr_prop_weed_bigbag_01a",
+        "GrabMax": "5",
+        "Weight": 100,
+        "Search": false,
+        "Tiny": false,
+        "GrabItem": false,
+        "Grab": true,
+        "Carry": false
+    },
+    "Car-Keys": {
+        "Model": "p_car_keys_01",
+        "SearchTime": 40,
+        "GrabMin": 1,
+        "Tiny": 0.3,
+        "GrabItem": "car-keys",
+        "Grab": true,
+        "GrabMax": 1
+    }
+}

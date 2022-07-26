@@ -1,0 +1,385 @@
+{
+  "locales": "en",
+  "NotifiKonumDebug" : false,
+  "Valebring": true,
+  "Facetime": true,
+  "MessageRecordMic": true,
+  "BottomNotif" : true,
+  "RealTime" : true,
+  "AirDrop": true,
+  "RingtoneXsound": true,
+  "JobMessageAnonymous": true,
+
+  "NewsPerm" : "News job code",
+  "RaceIdentifier" : {
+    "0": "ESX: users table indentifier",
+    "1": "QBCore : Citizien ID"
+  },
+
+  "YellowFilter": {
+    "mechanic" : "Mechanic",
+    "bartender" : "Bartender",
+    "lawyer" : "Lawyer"
+  },
+
+  "JobCategory": {
+    "police" : "Deparments",
+    "ambulance" : "Ambulance",
+    "mechanic" : "Contact a mechanic"
+  },
+
+  "JobMessages": [
+    {"label" : "PD", "jobname" : ["police", "sheriff", "#####"], "logoname": "police", "category": "police"},
+    {"label" : "EMS", "jobname" : ["ambulance"], "logoname": "ambulance", "category": "ambulance"},
+    {"label" : "Mechanic", "jobname" : ["mechanic", "rc "], "logoname": "mechanic", "category": "mechanic"}
+  ],
+
+
+  "NotifiKonum": {
+    "Messages": {"top": "30px", "left": "30px"},
+    "Jobs": {"top": "80px", "left": "30px"}
+  },
+
+
+  "background": {
+    "walpaper1": "4k_wallpaper.jpg",
+    "walpaper2": "back002.jpg",
+    "walpaper3": "car.jpg",
+    "walpaper4": "fortnite_4k.jpg",
+    "walpaper5": "gta5.jpg",
+    "walpaper6": "iluminacion.jpg",
+    "walpaper7": "nature_4k_fullhd.jpg",
+    "walpaper8": "newphone.png",
+    "walpaper9": "oscuridad.jpg",
+    "walpaper10": "paisajes.jpg",
+    "walpaper11": "playa.jpg",
+    "walpaper12": "rainy_night.jpg",
+    "walpaper13": "tokio.jpg",
+    "walpaper14": "sahesiz.png"
+  },
+
+  "background_default": {
+    "label": "walpaper8",
+    "value": "newphone.png"
+  },
+
+
+
+
+  "sonido": {
+    "Astronomia": "ring.ogg",
+    "Bella Ciao": "bella_ciao.ogg",
+    "Iphone 11": "iphone_11.ogg",
+    "XXXTentacion": "xtentacion.ogg",
+    "enemysquid": "enemysquid.ogg",
+    "NoiDoi": "NoiDoi.ogg"
+  },
+
+  "sonido_default": {
+    "label": "Astronomia",
+    "value": "ring.ogg"
+  },
+
+  "coque_default": {
+    "label": "Iphonex",
+    "value": "iphonex.png"
+  },
+
+  "StarterApp" : [
+    {"name": "Messages",  "categori": "social", "icons": "/html/static/img/icons/messages.png", "routeName": "messages", "puceRef": "nbMessagesUnread"},
+    {"name": "Camera",    "categori": "jobs", "icons": "/html/static/img/icons/camera.png", "routeName": "photo"},
+    {"name": "Jobs",      "categori": "jobs", "icons": "/html/static/img/icons/jobm.png", "routeName": "jobm", "puceRef": "nbJobMessRead"},
+    {"name": "Mail",      "categori": "social", "icons": "/html/static/img/icons/mail.png", "routeName": "mail"},
+    {"name": "Bank",     "categori": "finance", "icons": "/html/static/img/icons/wallet.png", "routeName": "bankb"},
+    {"name": "Billing",  "categori": "finance", "icons": "/html/static/img/icons/logo.png", "routeName": "faturapages"}
+  ],
+
+  "AppStore": [
+    {
+      "name": "Twitter",
+      "icons": "/html/static/img/icons/twitter.png",
+      "categori": "social",
+      "detail": "Social Media App",
+      "routeName": "twitter.splash",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Dark Chat",
+      "icons": "/html/static/img/icons/tchat.png",
+      "categori": "social",
+      "detail": "Chat App",
+      "routeName": "tchat.channel",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Yellow Pages",
+      "icons": "/html/static/img/icons/yellow.png",
+      "categori": "social",
+      "detail": "Job find and share app",
+      "routeName": "yellowpages.show",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "News",
+      "icons": "/html/static/img/icons/haber.png",
+      "categori": "jobs",
+      "detail": "News App",
+      "routeName": "haberler.show",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "YouTube",
+      "icons": "/html/static/img/icons/youtubeicon.png",
+      "categori": "social",
+      "detail": "Youtube App",
+      "routeName": "you",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Instagram",
+      "icons": "/html/static/img/icons/instagram.png",
+      "categori": "social",
+      "detail": "Social Media App",
+      "routeName": "instagramslash",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Vale",
+      "icons": "/html/static/img/icons/vale.png",
+      "detail": "Vale App",
+      "categori": "jobs",
+      "routeName": "vale",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Games",
+      "icons": "/html/static/img/icons/games.png",
+      "detail": "Games",
+      "categori": "mix",
+      "routeName": "tetris",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Gallery",
+      "icons": "/html/static/img/icons/photos.png",
+      "detail": "Gallery App",
+      "categori": "mix",
+      "routeName": "gallery",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "GPS",
+      "icons": "/html/static/img/icons/maps.png",
+      "detail": "GPS App",
+      "categori": "mix",
+      "routeName": "gps",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Stock Market",
+      "icons": "/html/static/img/icons/stocks.png",
+      "detail": "Stock market app",
+      "categori": "finance",
+      "routeName": "borsaa",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Race",
+      "icons": "/html/static/img/icons/race.png",
+      "detail": "Race App",
+      "categori": "mix",
+      "routeName": "racea",
+      "blockedjobs": [{
+        "police": "police",
+        "ambulance": "ambulance"
+      }],
+      "allowjob": [],
+      "show": false
+    },
+    {
+      "name": "Note",
+      "icons": "/html/static/img/icons/notes.png",
+      "detail": "Note App",
+      "categori": "mix",
+      "routeName": "note",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Music",
+      "icons": "/html/static/img/icons/music2.png",
+      "detail": "Music App",
+      "categori": "mix",
+      "routeName": "musicc",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Götür",
+      "icons": "/html/static/img/icons/gotur.png",
+      "categori": "jobs",
+      "detail": "Application where you can buy food and necessities",
+      "routeName": "getir",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Ebay",
+      "icons": "/html/static/img/icons/ebay.png",
+      "categori": "jobs",
+      "detail": "Application where you can buy food and necessities",
+      "routeName": "ebay",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Moov",
+      "icons": "/html/static/img/icons/moov.png",
+      "detail": "Car rental",
+      "categori": "jobs",
+      "routeName": "rentcar",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Car Seller",
+      "icons": "/html/static/img/icons/carsales.png",
+      "detail": "Used car buying and selling application",
+      "routeName": "ikinciel",
+      "categori": "jobs",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Calculator",
+      "icons": "/html/static/img/icons/calculator.png",
+      "detail": "Calculator app",
+      "categori": "mix",
+      "routeName": "calcu",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Taxi",
+      "icons": "/html/static/img/icons/taxijob.png",
+      "detail": "Taxi App",
+      "categori": "jobs",
+      "routeName": "taxi",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Tinder",
+      "icons": "/html/static/img/icons/tinder2.png",
+      "detail": "Flirt, chat and find your match! Easy way to meet new people",
+      "categori": "social",
+      "routeName": "tindersc",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "9Gag",
+      "icons": "/html/static/img/icons/9gag.png",
+      "categori": "social",
+      "detail": "Fun photos and videos",
+      "routeName": "9gag",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Zedge",
+      "icons": "/html/static/img/icons/zedge.png",
+      "detail": "Custom wallpaper and Ringtone",
+      "categori": "mix",
+      "routeName": "zedge",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "MDT",
+      "icons": "/html/static/img/icons/mdt.png",
+      "detail": "Qb MDT",
+      "categori": "jobs",
+      "routeName": "pmdt",
+      "blockedjobs": [],
+      "allowjob": [{
+        "police": "police"
+      }],
+      "show": true
+    },
+    {
+      "name": "House",
+      "icons": "/html/static/img/icons/home.png",
+      "detail": "Qb Home",
+      "categori": "mix",
+      "routeName": "qbhouse",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Qbit",
+      "icons": "/html/static/img/icons/qbit.png",
+      "detail": "Qbit",
+      "categori": "finance",
+      "routeName": "qbcrypto",
+      "blockedjobs": [],
+      "allowjob": [],
+      "show": true
+    },
+    {
+      "name": "Business",
+      "icons": "/html/static/img/icons/business.png",
+      "detail": "Businnes",
+      "categori": "jobs",
+      "routeName": "bqhome",
+      "blockedjobs": [{
+        "unemployed": "unemployed",
+        "bus": "bus",
+        "judge": "judge",
+        "lawyer": "lawyer",
+        "reporter": "reporter",
+        "trucker": "trucker",
+        "tow": "tow",
+        "garbage": "garbage",
+        "vineyard": "vineyard",
+        "hotdog": "hotdog"
+      }],
+      "allowjob": [],
+      "show": true
+    }
+  ]
+}

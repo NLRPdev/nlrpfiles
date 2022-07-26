@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+  <style type="text/css">
+    
+
+
+    html,body {
+      background-color: transparent;
+      overflow: hidden;
+/*      background-image: url("https://cdn.wccftech.com/wp-content/uploads/2014/11/gtav-comp-2-1.png");*/
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+/*      background-color: transparent;*/
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #container {
+      user-select: none;
+      font-family: 'Bebas Neue';
+      position: absolute;
+      top: 60%;
+      left: 60%;
+      transform: translate(-50%,-50%);
+
+      width: auto;
+      height: auto;
+
+
+      display: flex;
+      flex-direction: column;
+/*      box-shadow: 10px 10px 10px black;*/
+      border-radius: 5px;
+    }
+
+    #row {
+      margin-top: 1.5%;
+      width: auto;
+      display: flex;
+      align-content: center;
+      flex-direction: row;
+    }
+
+    #button{
+      border: 1px solid white;
+      color: white;
+      font-size: 150%;
+      text-align: center;
+      border-radius: 2.5px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.81);
+    }
+
+    #useinfo{
+      padding: 10px;
+      padding-top: 12px;
+      line-height: 80%;
+      /*background-color: rgba(0, 0, 0, 0.0);*/
+      vertical-align: center;
+      /*backdrop-filter: blur(5px);*/
+      color: white;
+      font-size: 20px;
+      margin-left: 3px;
+      width: auto;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <div id='container'></div>
+
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+
+    var Current = {}
+    var Open = false;
+
+    window.addEventListener('message',function(event) {
+      if (event.data.type == "show") {
+        Open = true;
+        $('#container').empty()
+        $.each(event.data.message, function(index,value){
+          var raw = value.key
+
+          var uppercase = raw.toUpperCase();
+          Current[raw] = $(`
+            <div id='row'>
+              <div id='button'><kbd>${uppercase}</kbd></div>
+              <div id='useinfo'>${value.label}</div>
+            </div>
+          `).appendTo("#container");
+        });
+      }else if(event.data.type == 'hide') {
+        Open = false;
+        $('#container').empty()
+      }
+    })
+
+    $("body").keypress(function(e){
+      if (Open) {
+        console.log("Open")
+        if (Current[String.fromCharCode(e.which)]){
+          console.log("We have this")
+          $(Current[String.fromCharCode(e.which)]).css("animation","tada");
+          $(Current[String.fromCharCode(e.which)]).css("animation-duration","2s");
+          
+          // $(Current[String.fromCharCode(e.which)]).removeClass( "animation" );
+        } 
+      }
+    });
+
+</script>
+<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+</body>
+</html>
+

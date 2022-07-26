@@ -1,0 +1,37 @@
+{
+    "New Robbery": {
+        "Blip": false,
+        "ShellDefaultSettings": "NONE",
+        "Doors": {
+            "New Doors:4095": {
+                "doorObjects": {
+                    "4848642": {
+                        "model": -2121568016,
+                        "pos": {
+                            "x": 267.3699645996094,
+                            "w": 248.7378845214844,
+                            "z": 106.37024688720705,
+                            "y": 213.40798950195313
+                        }
+                    }
+                },
+                "ctrlPoint": {
+                    "x": 267.5345458984375,
+                    "w": 0,
+                    "z": 106.46517944335938,
+                    "y": 213.96832275390626
+                },
+                "Minigame": "NP-MiniGame"
+            }
+        },
+        "Enabled": true,
+        "DoorMiniGame": "NONE",
+        "CoolDown": 0,
+        "Inhabitants": [],
+        "CopCount": 0,
+        "Door": false,
+        "Garage": [],
+        "Shell": false,
+        "Objects": []
+    }
+}

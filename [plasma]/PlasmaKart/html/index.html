@@ -1,0 +1,157 @@
+<html>
+	<head>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+	<form id="register">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Create a Lobby</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        
+						<div class="form-row">
+                            <div class="name">Lobby Name : </div>
+                            <div class="value">
+								<div class="input-group-desc">
+									<input class="input--style-5" id="sessionName" type="text" name="session_Name">
+									<label class="label--desc">Example : Super Race</label>
+								</div>
+                            </div>
+                        </div>
+						
+
+                        <!-- <div class="form-row"> -->
+                            <!-- <div class="name">Your pseudo : </div> -->
+                            <!-- <div class="value"> -->
+                                <!-- <div class="input-group-desc"> -->
+                                    <!-- <input class="input--style-5" id="creatorPseudo" type="text" name="creator_Pseudo"> -->
+									<!-- <label class="label--desc">Example: Super Pseudo</label> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+						
+						
+						
+						<div class="form-row">
+                            <div class="name">Race Mode : </div>
+                            <div class="value">
+                                <div class="input-group-desc">
+                                    <select class="input--style-5" name="GameMode" id="GameMode">
+										<option value="Classic">Classic Race</option>
+										<option value="Battle">Battle Race</option>
+									</select>
+									<label class="label--desc">Race Mode</label>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						
+						<div class="form-row">
+                            <div class="name">Maps : </div>
+                            <div class="value">
+                                <div class="input-group-desc">
+                                    <select class="input--style-5" name="Maps" id="Maps">
+										<option value="PlasmaRace 1">PlasmaRace 1</option>
+										<option value="PlasmaRace 2">PlasmaRace 2</option>
+										<!-- <option value="Maze Bank Race 1">Maze Bank Race 1</option> -->
+										<!-- <option value="Maze Bank Race 2">Maze Bank Race 2</option> -->
+										
+										<!-- ADD YOUR MAP HERE -->
+									</select>
+									<label class="label--desc">On which track will you play</label>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						
+						<div class="form-row">
+                            <div class="name">Power :</div>
+                            <div class="value">
+                                <div class="input-group-desc">
+                                    <select class="input--style-5" name="cylindre" id="cylindre">
+										<option value="50"> 50cc</option>
+										<option value="100"> 100cc</option>
+										<option value="150"> 150cc</option>
+										<option value="200"> 200cc</option>
+									</select>
+									<label class="label--desc"></label>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						<div class="form-row">
+                            <div class="name">Nb of lap : </div>
+                            <div class="value">
+                                <div class="input-group-desc">
+                                    <select class="input--style-5" name="NbLap" id="NbLap">
+										<option value="1"> 1</option>
+										<option value="2"> 2</option>
+										<option value="3"> 3</option>
+										<option value="4"> 4</option>
+										<option value="5"> 5</option>
+										<option value="6"> 6</option>
+										<option value="7"> 7</option>
+										<option value="8"> 8</option>
+										<option value="9"> 9</option>
+										<option value="10"> 10</option>
+									</select>
+									<label class="label--desc">How many lap will be done</label>
+                                </div>
+                            </div>
+                        </div>
+						
+						
+						
+						<!-- <div class="form-row"> -->
+                            <!-- <div class="name">Nb d'impact : </div> -->
+                            <!-- <div class="value"> -->
+                                <!-- <div class="input-group-desc"> -->
+                                    <!-- <select class="input--style-5" name="NbImpact" id="NbImpact"> -->
+										<!-- <option value="1">1</option> -->
+										<!-- <option value="2">2</option> -->
+										<!-- <option value="3">3</option> -->
+										<!-- <option value="4">4</option> -->
+										<!-- <option value="5">5</option> -->
+									<!-- </select> -->
+									<!-- <label class="label--desc">Nombre d'impact recues avant éliminations</label> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+                        <div class="form-row p-t-20">
+                            
+                        </div>
+                        <div>
+                            <button class="btn btn--radius-2 btn--red" type="submit">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+	</form>
+    </div>
+		<script src="script.js" type="text/javascript"></script>
+	</body>
+</html>

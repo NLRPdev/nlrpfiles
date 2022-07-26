@@ -1,0 +1,2 @@
+To use this script, you just need to open the "resources" folder and choose your framework
+Then copy the script into one of the framework and place it on your server.

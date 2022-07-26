@@ -1,0 +1,3422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-switch@2.0.4/dist/css/bulma-switch.min.css" integrity="sha256-8EYN3r3ZVCWlBZCQhQOhcPX/CLKL1TVzxxeR/HzR5vU=" crossorigin="anonymous">
+  <style type="text/css">
+
+
+
+    html,body {
+     /* background-image: url("https://cdn.wccftech.com/wp-content/uploads/2014/11/gtav-comp-2-1.png");*/
+      margin: 0;
+      padding: 0;
+      outline: none;
+      border: none;
+      background-color: transparent !important;
+    }
+
+    .container{
+      /*overflow: hidden;*/
+      /*  
+      background-color: red;*/
+      user-select: none;
+      font-family: 'Bebas Neue';
+      position: absolute;
+      top: 50%;
+      left: 80%;
+      transform: translate(-50%,-50%);
+      max-height: 50%;
+      min-height: 50%;
+      display: flex;  
+      flex-direction: row;
+      gap: 10px;
+
+    }
+
+    .items{
+      flex-grow: 1;
+    }
+
+
+/*
+    .sideboard > div > div */
+
+    .itemgrid{
+      visibility: hidden;
+      border-radius: 5px;
+      display: grid;
+      background-color: rgba(0,0,0,0.66);
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 10px;
+
+
+
+    } 
+
+    .itemgrid > div{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://static.thenounproject.com/png/211971-200.png');
+      background-size: 175% 150%;
+      background-repeat: no-repeat;
+      background-position: center;
+      image-rendering: -webkit-optimize-contrast;
+      /*background-color: rgba(255,255,255,0.36);*/
+      display: flex;
+      overflow: hidden;
+      border-radius: 5px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .itemgrid > div:hover{
+      -webkit-box-shadow:0px 0px 11px 2px rgba(255,255,255,0.78);
+      -moz-box-shadow: 0px 0px 11px 2px rgba(255,255,255,0.78);
+      box-shadow: 0px 0px 11px 2px rgba(255,255,255,0.78);
+    }
+
+    .itemgrid > div > div{
+      color: white;
+      font-size: 75%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.26);
+      text-align: center;
+    }
+
+    .container > div {
+      position:relative;
+      width:auto;
+      overflow: auto;
+    }
+
+    .container > div > div{
+      padding: 6px;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+
+
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .sideboard{
+      visibility: hidden;
+      /*background-color: rgba(0,0,0,0.66);*/
+      flex-grow: 1;
+      border-radius: 5px;
+      display:flex;
+      justify-items: center;
+      flex-direction: column;
+      /*transform: perspective(1300px) rotateY(-5deg);*/
+      /*box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;*/
+      transition: transform 0.75s ease 0s;
+    }
+/*
+    .sideboard:hover{
+       transform: perspective(2600px) rotateY(-5deg);
+    }
+
+    .sideboard > *:hover{
+       transform: perspective(2600px) rotateY(-5deg);
+    }
+*/
+    .sideboard > * {
+      /*transform: perspective(1300px) rotateY(-5deg);*/
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+      transition: transform 1s ease 0s;
+
+    }
+
+    .sideboard > .collapsible {
+      overflow: hidden;
+         flex-shrink:0;
+      width: 255px;
+      display: flex; 
+      flex-direction: column;  
+
+    } 
+
+    .sideboard > .collapsible > .cHeader{
+      width: 100%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: rgba(0,0,0,0.44);
+      display: flex;
+
+      flex-direction: row;
+      justify-items: stretch;
+      align-items: center;
+      text-align: center;
+
+    }
+
+
+    .sideboard > .collapsible > .cHeader > .cArrow:hover{
+      color: white;
+    }
+
+    .cLabel{
+      color: white;
+      flex-grow: 1;
+      padding:10px;
+    }
+
+    .cArrow{
+      flex-grow: 0;
+      padding:10px;
+    }
+
+    .cButton1{
+      color: grey;
+      flex-grow: 1;
+      padding:10px;
+    }
+
+    .cButton2{  
+      color: grey;
+      flex-grow: 1;
+      padding:10px;
+    }
+
+    .cButton2:hover{
+      color: white;
+    }
+
+    .cButton1:hover{
+      color: white;
+    }
+
+    .cContent{
+      overflow-x: hidden;
+      overflow-y: scroll;
+    /*  height: 200px;*/
+      padding: 5px;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.75s linear;
+      display: none;
+      align-items: center;
+      flex-direction: column;
+      background-color: rgba(0,0,0,0.33);
+      gap: 10px;
+      color: white;
+    }
+
+
+
+    .minilist{
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      justify-items: center;
+      min-height: 25%;
+      max-height: 75%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+
+    .minilistHeader{
+      text-align: center;
+      width: 100%;
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    .minilist > div{
+
+    }
+
+    .buttons{
+      font-size: 150%;
+      justify-content: center;
+      gap: 25%;
+      display: flex;
+      flex-direction: row;
+    }
+
+input[type="radio"]{
+    border: none;
+    outline:none;
+}
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class='container'>
+    <div class='items'>
+      <div class='itemgrid'></div>          
+    </div>
+    <div class='sideboard'>
+    </div>
+  </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clone/1.0.4/clone.min.js" integrity="sha512-DnAb1jKHBEwQiL3WNROTHx15qqHPjb5APGfUFopcXO4gjk4T/vGNwLbffnfwFYfle/cCQ1x/fi5u5qsJmKrPAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clone/1.0.4/clone.min.js"></script>
+<script type="text/javascript">
+
+var peds =  [
+    's_m_y_clown_01',
+    's_f_y_hooker_01',
+    's_f_y_hooker_02',
+    's_f_y_hooker_03',
+    'csb_stripper_01',
+    'csb_stripper_02',
+    's_f_y_stripper_01',
+    's_f_y_stripper_02',
+    's_f_y_stripperlite',
+    'a_f_y_topless_01',
+    'u_m_m_streetart_01',
+    'u_m_y_zombie_01',
+    'u_m_y_abner',
+    'a_m_m_acult_01',
+    'a_m_o_acult_01',
+    'a_m_o_acult_02',
+    'a_m_y_acult_01',
+    'a_m_y_acult_02',
+    's_f_y_airhostess_01',
+    's_m_y_airworker',
+    'u_m_m_aldinapoli',
+    's_m_m_movalien_01',
+    'ig_amandatownley',
+    's_m_y_ammucity_01',
+    'ig_andreas',
+    'csb_anita',
+    'csb_anton',
+    'u_m_y_antonb',
+    'g_m_m_armboss_01',
+    'g_m_m_armgoon_01',
+    'g_m_y_armgoon_02',
+    's_m_m_armoured_01',
+    's_m_m_armoured_02',
+    's_m_y_armymech_01',
+    'ig_ashley',
+    's_m_y_autopsy_01',
+    's_m_m_autoshop_01',
+    's_m_m_autoshop_02',
+    'g_m_y_azteca_01',
+    'u_m_y_babyd',
+    'g_m_y_ballaeast_01',
+    'g_m_y_ballaorig_01',
+    'g_f_y_ballas_01',
+    'csb_ballasog',
+    'ig_ballasog',
+    'g_m_y_ballasout_01',
+    'ig_bankman',
+    'u_m_m_bankman',
+    's_m_y_barman_01',
+    's_f_m_fembarber',
+    'ig_barry',
+    's_f_y_bartender_01',
+    'u_m_y_baygor',
+    's_f_y_baywatch_01',
+    's_m_y_baywatch_01',
+    'a_f_m_beach_01',
+    'a_f_y_beach_01',
+    'a_m_m_beach_01',
+    'a_m_m_beach_02',
+    'a_m_o_beach_01',
+    'a_m_y_beach_01',
+    'a_m_y_beach_02',
+    'a_m_y_beach_03',
+    'a_m_y_beachvesp_01',
+    'a_m_y_beachvesp_02',
+    'ig_bestmen',
+    'ig_beverly',
+    'a_f_m_bevhills_01',
+    'a_f_m_bevhills_02',
+    'a_f_y_bevhills_01',
+    'a_f_y_bevhills_02',
+    'a_f_y_bevhills_03',
+    'a_f_y_bevhills_04',
+    'a_m_m_bevhills_01',
+    'a_m_m_bevhills_02',
+    'a_m_y_bevhills_01',
+    'a_m_y_bevhills_02',
+    'u_m_m_bikehire_01',
+    'u_f_y_bikerchic',
+    's_m_y_blackops_01',
+    's_m_y_blackops_02',
+    'a_f_m_bodybuild_01',
+    's_m_m_bouncer_01',
+    'ig_brad',
+    'a_m_y_breakdance_01',
+    'csb_bride',
+    'ig_bride',
+    'csb_burgerdrug',
+    'u_m_y_burgerdrug_01',
+    's_m_y_busboy_01',
+    'a_m_y_busicas_01',
+    'a_f_m_business_02',
+    'a_f_y_business_01',
+    'a_f_y_business_02',
+    'a_f_y_business_03',
+    'a_f_y_business_04',
+    'a_m_m_business_01',
+    'a_m_y_business_01',
+    'a_m_y_business_02',
+    'a_m_y_business_03',
+    's_m_o_busker_01',
+    'csb_car3guy1',
+    'ig_car3guy1',
+    'csb_car3guy2',
+    'ig_car3guy2',
+    'ig_casey',
+    'csb_chef',
+    'ig_chef',
+    's_m_y_chef_01',
+    's_m_m_chemsec_01',
+    'g_m_m_chemwork_01',
+    'ig_chengsr',
+    'g_m_m_chiboss_01',
+    'g_m_m_chicold_01',
+    'g_m_m_chigoon_01',
+    'g_m_m_chigoon_02',
+    'csb_chin_goon',
+    'u_m_y_chip',
+    'ig_chrisformage',
+    's_m_m_ciasec_01',
+    'mp_m_claude_01',
+    'ig_clay',
+    'ig_claypain',
+    'csb_cletus',
+    'ig_cletus',
+    's_m_m_cntrybar_01',
+    'u_f_y_comjane',
+    's_m_y_construct_01',
+    's_m_y_construct_02',
+    'u_f_m_corpse_01',
+    'u_f_y_corpse_01',
+    'u_f_y_corpse_02',
+    'csb_customer',
+    'a_m_y_cyclist_01',
+    'u_m_y_cyclist_01',
+    'ig_dale',
+    'ig_davenorton',
+    's_m_y_dealer_01',
+    'csb_denise_friend',
+    'ig_denise',
+    'ig_devin',
+    's_m_y_devinsec_01',
+    'a_m_y_dhill_01',
+    's_m_m_dockwork_01',
+    's_m_y_dockwork_01',
+    's_m_m_doctor_01',
+    'ig_dom',
+    's_m_y_doorman_01',
+    'a_f_m_downtown_01',
+    'a_m_y_downtown_01',
+    'ig_dreyfuss',
+    'ig_russiandrunk',
+    'ig_drfriedlander',
+    's_m_y_dwservice_01',
+    's_m_y_dwservice_02',
+    'a_f_m_eastsa_01',
+    'a_f_m_eastsa_02',
+    'a_f_y_eastsa_01',
+    'a_f_y_eastsa_02',
+    'a_f_y_eastsa_03',
+    'a_m_m_eastsa_01',
+    'a_m_m_eastsa_02',
+    'a_m_y_eastsa_01',
+    'a_m_y_eastsa_02',
+    'a_f_y_epsilon_01',
+    'a_m_y_epsilon_01',
+    'a_m_y_epsilon_02',
+    'mp_m_exarmy_01',
+    'ig_fabien',
+    's_f_y_factory_01',
+    's_m_y_factory_01',
+    'g_m_y_famca_01',
+    'mp_m_famdd_01',
+    'g_m_y_famdnf_01',
+    'g_m_y_famfor_01',
+    'g_f_y_families_01',
+    'a_m_m_farmer_01',
+    'a_f_m_fatbla_01',
+    'a_f_m_fatcult_01',
+    'a_m_m_fatlatin_01',
+    'a_f_m_fatwhite_01',
+    'ig_fbisuit_01',
+    'u_m_m_fibarchitect',
+    'u_m_y_fibmugger_01',
+    's_m_m_fiboffice_01',
+    's_m_m_fiboffice_02',
+    'mp_m_fibsec_01',
+    'u_m_m_filmdirector',
+    'u_m_o_finguru_01',
+    's_m_y_fireman_01',
+    'a_f_y_fitness_01',
+    'a_f_y_fitness_02',
+    'ig_floyd',
+    'csb_fos_rep',
+    'csb_g',
+    's_m_m_gaffer_01',
+    'csb_ramp_gang',
+    'ig_ramp_gang',
+    's_m_y_garbage',
+    's_m_m_gardener_01',
+    'a_m_y_gay_01',
+    'a_m_y_gay_02',
+    'a_m_m_genfat_01',
+    'a_m_m_genfat_02',
+    'a_f_y_genhot_01',
+    'a_f_o_genstreet_01',
+    'a_m_o_genstreet_01',
+    'a_m_y_genstreet_01',
+    'a_m_y_genstreet_02',
+    's_m_m_gentransport',
+    'u_m_m_glenstank_01',
+    'a_f_y_golfer_01',
+    'a_m_m_golfer_01',
+    'a_m_y_golfer_01',
+    'u_m_m_griff_01',
+    's_m_y_grip_01',
+    'csb_groom',
+    'ig_groom',
+    'csb_grove_str_dlr',
+    'u_m_y_guido_01',
+    'u_m_y_gunvend_01',
+    's_m_m_hairdress_01',
+    'csb_hao',
+    'ig_hao',
+    'a_m_m_hasjew_01',
+    'a_m_y_hasjew_01',
+    'hc_driver',
+    'hc_gunman',
+    'hc_hacker',
+    'csb_ramp_hic',
+    'ig_ramp_hic',
+    's_m_m_highsec_01',
+    's_m_m_highsec_02',
+    'a_f_y_hiker_01',
+    'a_m_y_hiker_01',
+    'a_m_m_hillbilly_01',
+    'a_m_m_hillbilly_02',
+    'a_f_y_hippie_01',
+    'u_m_y_hippie_01',
+    'a_m_y_hippy_01',
+    'a_f_y_hipster_01',
+    'a_f_y_hipster_02',
+    'a_f_y_hipster_03',
+    'a_f_y_hipster_04',
+    'a_m_y_hipster_01',
+    'a_m_y_hipster_02',
+    'a_m_y_hipster_03',
+    'csb_ramp_hipster',
+    'ig_ramp_hipster',
+    'u_f_y_hotposh_01',
+    'csb_hugh',
+    'ig_hunter',
+    's_m_y_hwaycop_01',
+    'u_m_y_imporage',
+    'csb_imran',
+    'a_f_o_indian_01',
+    'a_f_y_indian_01',
+    'a_m_m_indian_01',
+    'a_m_y_indian_01',
+    'ig_janet',
+    'csb_janitor',
+    's_m_m_janitor',
+    'ig_jay_norris',
+    'u_m_m_jesus_01',
+    'a_m_y_jetski_01',
+    'ig_jewelass',
+    'u_f_y_jewelass_01',
+    'u_m_m_jewelsec_01',
+    'u_m_m_jewelthief',
+    'ig_jimmyboston',
+    'ig_jimmydisanto',
+    'ig_joeminuteman',
+    'ig_johnnyklebitz',
+    'ig_josef',
+    'ig_josh',
+    'a_f_y_juggalo_01',
+    'a_m_y_juggalo_01',
+    'u_m_y_justin',
+    'ig_kerrymcintosh',
+    'g_m_m_korboss_01',
+    'g_m_y_korean_01',
+    'g_m_y_korean_02',
+    'g_m_y_korlieut_01',
+    'a_f_m_ktown_01',
+    'a_f_m_ktown_02',
+    'a_f_o_ktown_01',
+    'a_m_m_ktown_01',
+    'a_m_o_ktown_01',
+    'a_m_y_ktown_01',
+    'a_m_y_ktown_02',
+    'ig_lamardavis',
+    's_m_m_lathandy_01',
+    'a_m_y_latino_01',
+    'ig_lazlow',
+    'ig_lestercrest',
+    'ig_lifeinvad_01',
+    'ig_lifeinvad_02',
+    's_m_m_lifeinvad_01',
+    's_m_m_linecook',
+    'g_f_y_lost_01',
+    'g_m_y_lost_01',
+    'g_m_y_lost_02',
+    'g_m_y_lost_03',
+    's_m_m_lsmetro_01',
+    'ig_magenta',
+    's_f_m_maid_01',
+    'a_m_m_malibu_01',
+    'u_m_y_mani',
+    'ig_manuel',
+    's_m_m_mariachi_01',
+    'csb_ramp_marine',
+    's_m_m_marine_01',
+    's_m_m_marine_02',
+    's_m_y_marine_01',
+    's_m_y_marine_02',
+    's_m_y_marine_03',
+    'u_m_m_markfost',
+    'ig_marnie',
+    'mp_m_marston_01',
+    'ig_maryann',
+    'csb_maude',
+    'ig_maude',
+    'a_m_y_methhead_01',
+    'csb_ramp_mex',
+    'ig_ramp_mex',
+    'g_m_m_mexboss_01',
+    'g_m_m_mexboss_02',
+    'a_m_m_mexcntry_01',
+    'g_m_y_mexgang_01',
+    'g_m_y_mexgoon_01',
+    'g_m_y_mexgoon_02',
+    'g_m_y_mexgoon_03',
+    'a_m_m_mexlabor_01',
+    'a_m_y_mexthug_01',
+    'ig_michelle',
+    's_f_y_migrant_01',
+    's_m_m_migrant_01',
+    'u_m_y_militarybum',
+    'ig_milton',
+    's_m_y_mime',
+    'u_f_m_miranda',
+    'u_f_y_mistress',
+    'mp_f_misty_01',
+    'ig_molly',
+    'a_m_y_motox_01',
+    'a_m_y_motox_02',
+    'u_f_o_moviestar',
+    's_f_y_movprem_01',
+    's_m_m_movprem_01',
+    's_m_m_movspace_01',
+    'ig_mrk',
+    'ig_mrs_thornhill',
+    'ig_mrsphillips',
+    'a_m_y_musclbeac_01',
+    'a_m_y_musclbeac_02',
+    'csb_mweather',
+    'ig_natalia',
+    'ig_nervousron',
+    'ig_nigel',
+    'a_m_m_afriamer_01',
+    'mp_m_niko_01',
+    'a_m_m_og_boss_01',
+    'ig_old_man1a',
+    'ig_old_man2',
+    'ig_omega',
+    'ig_oneil',
+    'ig_orleans',
+    'csb_ortega',
+    'ig_ortega',
+    'csb_oscar',
+    'a_m_m_paparazzi_01',
+    'u_m_y_paparazzi',
+    'ig_paper',
+    's_m_m_paramedic_01',
+    'u_m_y_party_01',
+    'u_m_m_partytarget',
+    'ig_patricia',
+    's_m_y_pestcont_01',
+    's_m_m_pilot_01',
+    's_m_m_pilot_02',
+    's_m_y_pilot_01',
+    'u_m_y_pogo_01',
+    'g_m_y_pologoon_01',
+    'g_m_y_pologoon_02',
+    'a_m_m_polynesian_01',
+    'a_m_y_polynesian_01',
+    'u_f_y_poppymich',
+    'csb_porndudes',
+    's_m_m_postal_01',
+    's_m_m_postal_02',
+    'ig_priest',
+    'u_f_y_princess',
+    's_m_m_prisguard_01',
+    's_m_y_prismuscl_01',
+    's_m_y_prisoner_01',
+    'u_m_y_proldriver_01',
+    'a_f_m_prolhost_01',
+    'a_m_m_prolhost_01',
+    'u_f_o_prolhost_01',
+    'csb_prologuedriver',
+    'csb_prolsec',
+    'ig_prolsec_02',
+    'u_m_m_prolsec_01',
+    'u_f_m_promourn_01',
+    'u_m_m_promourn_01',
+    'mp_g_m_pros_01',
+    's_f_y_ranger_01',
+    's_m_y_ranger_01',
+    'csb_reporter',
+    'u_m_m_rivalpap',
+    'a_m_y_roadcyc_01',
+    's_m_y_robber_01',
+    'csb_roccopelosi',
+    'ig_roccopelosi',
+    'u_m_y_rsranger_01',
+    'a_f_y_runner_01',
+    'a_m_y_runner_01',
+    'a_m_y_runner_02',
+    'a_f_y_rurmeth_01',
+    'a_m_m_rurmeth_01',
+    'a_f_m_salton_01',
+    'a_f_o_salton_01',
+    'a_m_m_salton_01',
+    'a_m_m_salton_02',
+    'a_m_m_salton_03',
+    'a_m_m_salton_04',
+    'a_m_o_salton_01',
+    'a_m_y_salton_01',
+    'g_m_y_salvaboss_01',
+    'g_m_y_salvagoon_01',
+    'g_m_y_salvagoon_02',
+    'g_m_y_salvagoon_03',
+    'u_m_y_sbike',
+    'a_f_y_scdressy_01',
+    's_m_m_scientist_01',
+    'csb_screen_writer',
+    'ig_screen_writer',
+    's_f_y_scrubs_01',
+    's_m_m_security_01',
+    's_f_m_shop_high',
+    's_f_y_shop_low',
+    's_m_y_shop_mask',
+    's_f_y_shop_mid',
+    'mp_m_shopkeep_01',
+    'ig_siemonyetarian',
+    'a_f_y_skater_01',
+    'a_m_m_skater_01',
+    'a_m_y_skater_01',
+    'a_m_y_skater_02',
+    'a_f_m_skidrow_01',
+    'a_m_m_skidrow_01',
+    's_m_m_snowcop_01',
+    'a_m_m_socenlat_01',
+    'ig_solomon',
+    'a_f_m_soucent_01',
+    'a_f_m_soucent_02',
+    'a_f_o_soucent_01',
+    'a_f_o_soucent_02',
+    'a_f_y_soucent_01',
+    'a_f_y_soucent_02',
+    'a_f_y_soucent_03',
+    'a_m_m_soucent_01',
+    'a_m_m_soucent_02',
+    'a_m_m_soucent_03',
+    'a_m_m_soucent_04',
+    'a_m_o_soucent_01',
+    'a_m_o_soucent_02',
+    'a_m_o_soucent_03',
+    'a_m_y_soucent_01',
+    'a_m_y_soucent_02',
+    'a_m_y_soucent_03',
+    'a_m_y_soucent_04',
+    'a_f_m_soucentmc_01',
+    'u_m_m_spyactor',
+    'u_f_y_spyactress',
+    'u_m_y_staggrm_01',
+    'a_m_y_stbla_01',
+    'a_m_y_stbla_02',
+    'ig_stevehains',
+    'a_m_m_stlat_02',
+    'a_m_y_stlat_01',
+    'ig_stretch',
+    's_m_m_strperf_01',
+    's_m_m_strpreach_01',
+    'g_m_y_strpunk_01',
+    'g_m_y_strpunk_02',
+    's_m_m_strvend_01',
+    's_m_y_strvend_01',
+    'a_m_y_stwhi_01',
+    'a_m_y_stwhi_02',
+    'a_m_y_sunbathe_01',
+    'a_m_y_surfer_01',
+    's_m_y_swat_01',
+    's_f_m_sweatshop_01',
+    's_f_y_sweatshop_01',
+    'ig_talina',
+    'ig_tanisha',
+    'ig_taocheng',
+    'ig_taostranslator',
+    'u_m_o_taphillbilly',
+    'u_m_y_tattoo_01',
+    'a_f_y_tennis_01',
+    'a_m_m_tennis_01',
+    'ig_tenniscoach',
+    'ig_terry',
+    'ig_tomepsilon',
+    'csb_tonya',
+    'ig_tonya',
+    'a_f_m_tourist_01',
+    'a_f_y_tourist_01',
+    'a_f_y_tourist_02',
+    'a_m_m_tourist_01',
+    'ig_tracydisanto',
+    'csb_trafficwarden',
+    'ig_trafficwarden',
+    'a_f_m_tramp_01',
+    'a_m_m_tramp_01',
+    'a_m_o_tramp_01',
+    'u_m_o_tramp_01',
+    'a_f_m_trampbeac_01',
+    'a_m_m_trampbeac_01',
+    'a_m_m_tranvest_01',
+    'a_m_m_tranvest_02',
+    's_m_m_trucker_01',
+    'ig_tylerdix',
+    's_m_m_ups_01',
+    's_m_m_ups_02',
+    's_m_y_uscg_01',
+    'g_f_y_vagos_01',
+    's_m_y_valet_01',
+    'a_m_y_vindouche_01',
+    'a_f_y_vinewood_01',
+    'a_f_y_vinewood_02',
+    'a_f_y_vinewood_03',
+    'a_f_y_vinewood_04',
+    'a_m_y_vinewood_01',
+    'a_m_y_vinewood_02',
+    'a_m_y_vinewood_03',
+    'a_m_y_vinewood_04',
+    'ig_wade',
+    's_m_y_waiter_01',
+    'u_m_m_willyfist',
+    's_m_y_winclean_01',
+    'a_f_y_yoga_01',
+    'a_m_y_yoga_01',
+    'ig_zimbor',
+    'u_m_y_prisoner_01',
+    'mp_f_boatstaff_01',
+    'mp_m_boatstaff_01',
+    'ig_chef2',
+    'csb_chef2',
+    'csb_agent',
+    'ig_agent',
+    'csb_mp_agent14',
+    'ig_mp_agent14',
+    'ig_benny',
+    's_m_y_blackops_03',
+    's_m_m_ccrew_01',
+    'ig_karen_daniels',
+    'u_m_m_doa_01',
+    'u_m_m_edtoh',
+    'mp_f_execpa_01',
+    'mp_m_execpa_01',
+    'a_f_y_femaleagent',
+    's_m_m_fibsec_01',
+    'u_m_o_filmnoir',
+    'ig_g',
+    'mp_f_helistaff_01',
+    'csb_jackhowitzer',
+    'csb_money',
+    'ig_money',
+    'csb_paige',
+    'ig_paige',
+    'csb_popov',
+    'ig_popov',
+    'csb_rashcosvki',
+    'ig_rashcosvki',
+    'csb_undercover',
+    'mp_m_g_vagfun_01',
+    'csb_vagspeak',
+    'ig_vagspeak',
+    'mp_f_chbar_01',
+    'mp_f_cocaine_01',
+    'mp_f_counterfeit_01',
+    'mp_f_forgery_01',
+    'mp_f_meth_01',
+    'mp_f_weed_01',
+    'ig_malc',
+    'mp_m_cocaine_01',
+    'mp_m_counterfeit_01',
+    'mp_m_forgery_01',
+    'mp_m_meth_01',
+    'mp_m_weed_01',
+    'mp_f_cardesign_01',
+    'g_f_importexport_01',
+    'g_m_importexport_01',
+    'csb_avon',
+    'csb_bogdan',
+    'csb_mrs_r',
+    'ig_avon',
+    'ig_lestercrest_2',
+    'mp_f_execpa_02',
+    'mp_m_avongoon',
+    'mp_m_bogdangoon',
+    'mp_m_securoguard_01',
+    'mp_m_waremech_01',
+    'mp_m_weapexp_01',
+    'mp_m_weapwork_01',
+    'u_m_y_corpse_01',
+    'u_m_y_juggernaut_01',
+    'u_m_y_smugmech_01' // Probably don't touch
+]
+
+
+
+
+
+var tabs = {};
+
+
+
+
+// On load I need to pass:
+//--------------------------------
+// DoorMiniGames -- ALl minigames frm minigamesettings
+// ObjData -- All of the object data set for each useable object
+// CarClasses -- Car Classes
+// ShellSettings  -- Shell Settings in a Table
+// curRobs -- All current robberies converted to UI Data point 
+// ConfigAnims -- All animations from config.
+
+
+// Load Options
+// Shell Default Settings - Basically need to be able to edit the default shell settings - or shell presets.
+
+// Object Default Setter /DirkRobberies Defaults -- DONE
+// EditRobberies /DirkRobberies Edit -- 99%
+
+// Pass when editing the Config.Objects
+var newObjData = {}
+
+// Pass when editing shell default settings
+var ShellSettings = {}
+
+
+
+// PASS WHEN EDITING ROBBERIES
+var curRobs = {}
+var configAnims = []
+var DoorMiniGames = {}
+var carClasses = []
+var configWeapons = []
+
+
+
+
+
+            // "Weapon": "WEAPON_PISTOL",
+            // "Model": "player_zero",
+            // "WepOut": true,
+            // "Anim": "NONE",
+            // "Pos": {
+            //     "x": -54.48968124389648,
+            //     "y": -1104.5224609375,
+            //     "z": 26.4372272491455,
+            //     "w": 250.00001525878907
+            // },
+            // "Rad": 5.0,
+
+            // "TimeIn":5,
+            // "TimeOut":10, 
+            // "ChanceOut":10, 
+
+EditObject = function(rn,n,d){
+  $('.sideboard').empty();
+  if (!n) {
+    n = `New Object:${Math.floor(Math.random() * 100)}`
+   
+
+    if (Array.isArray(curRobs[rn].Objects)){
+      curRobs[rn].Objects = {};
+    }
+    curRobs[rn].Objects[n] = {
+      "Pos":false,
+      "Type": "NONE",
+      "SearchLoot":{
+        "bread":{
+          "MinAmount":0,
+          "MaxAmount":2, 
+          "Chance":23, 
+        }
+      }  
+ 
+    };
+
+    $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+      robName: rn,
+      Contents: curRobs[rn]
+    }))
+
+
+    d = curRobs[rn].Objects[n];
+
+
+  }
+
+
+
+
+
+  // BUTTONS
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);    
+  let BackButton = $(`<div class='cButton1'><i class="fas fa-arrow-left"></i></div>`).appendTo(butCont)
+  // let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+  // // Save Current Settings
+  // $(SaveButton).click(function(){
+  //   // POST TO FIVEM SAVING THE SETTINGS YOU'VE CHANGED
+  //   $(SaveButton).empty();
+  //   $(`<i class="fa-solid fa-spinner fa-spin-pulse"></i>`).appendTo(SaveButton);
+  //   setTimeout(function(){
+  //     $(SaveButton).empty();
+  //     $(`<i class="fas fa-save">`).appendTo(SaveButton);
+  //   }, 1500)
+  // })
+
+
+  // Go Back
+  $(BackButton).click(function(){
+    EditRobbery(rn)
+    $('.itemgrid').css("visibility","hidden");
+    $('.itemgrid').empty();
+  })
+
+
+  // Creating Card
+  let pedEditor = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let pedEditH  = $(`<div class='cHeader'></div>`).appendTo(pedEditor);       
+  let pedEditT = $(`<div class='cLabel'>Object Settings</div>`).appendTo(pedEditH);  
+  let pedEditC = $(`<div class ='cContent'></div>`).appendTo(pedEditor);   
+  
+  if (d.Type != "NONE"){
+    let ObjName = $(`
+         <input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${n}">`).appendTo(pedEditC);
+    $(ObjName).keypress(function() {
+      if ( event.which == 13 ) {
+        let newname = $(ObjName).val();
+        if (!curRobs[rn].Objects[newname]){
+          curRobs[rn].Objects[newname] = curRobs[rn].Objects[n]
+          delete curRobs[rn].Objects[n]
+          // Post to fivem 
+           $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))        
+          EditObject(rn, newname, curRobs[rn].Objects[newname])
+        }else{
+          Warning("An object with this name already exists try another name")
+        }
+      }
+      
+    });
+
+  }
+
+
+
+
+  // Model
+
+
+  let ObjectButton = $(`<button class="button is-small is-fullwidth is-link is-focused">Current Model: ${d.Type}</button>`).appendTo(pedEditC)
+
+  $(ObjectButton).click(function(){
+    $('.itemgrid').empty();
+    $('.sideboard').css("visibility","hidden")
+    $('.itemgrid').css("visibility","visible");
+    Object.entries(newObjData).forEach(([objn, d]) => {
+      let newitem = $(`<div></div>`).appendTo('.itemgrid');
+
+      $(newitem).css(`background-image`, `url('https://gta-objects.xyz/gallery/objects/${d.Model}.jpg')`)
+
+      $( newitem ).mouseout(function() {
+        // $(newitem).text("")
+        $(newitem).empty()
+      });
+
+      $( newitem ).mouseenter(function() {
+        $(`<div>${objn}</div>`).appendTo(newitem);
+        // $(newitem).text(`${objn}`)
+      });
+
+      $(newitem).click(function() {
+        $('.sideboard').css("visibility","visible")
+        curRobs[rn].Objects[n].Type = objn;
+        $(ObjectButton).text(`Current Model: ${objn}`)
+        // Post To FiveM for change of model.
+        EditObject(rn, n, curRobs[rn].Objects[n])
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+            robName: rn,
+            Contents: curRobs[rn]
+        }))
+        $('.itemgrid').css("visibility","hidden");
+        $('.itemgrid').empty();
+
+      });
+
+
+
+      if (objn == curRobs[rn].Objects[n].Type){
+        $( newitem ).css({
+          '-webkit-box-shadow':'0px 0px 11px 2px rgba(255,255,255,0.78)',
+          '-moz-box-shadow': '0px 0px 11px 2px rgba(255,255,255,0.78)',
+          'box-shadow': '0px 0px 11px 2px rgba(255,255,255,0.78)',
+        })
+
+      }
+
+    });
+  })
+
+  if (d.Type != "NONE"){
+    // Pos 
+
+    let oPosLabel = $(`<label style="font-size:75%;"for="Spawn">Position</label>`).appendTo(pedEditC);
+    let oPos = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(pedEditC);
+    $(oPos).css("margin-bottom","5px")
+    $(oPos).css("color","white");
+
+    $( oPos ).mouseout(function() {
+      $(this).css("color","white");
+    });
+
+    $( oPos ).mouseenter(function() {
+     $(this).css("color","rgba(45,85,255,0.77)");
+    });
+
+    $(oPos).click(function(){
+      $(oPos).addClass('fa-spin-pulse');
+      setTimeout(function(){
+        $(oPos).removeClass('fa-spin-pulse');
+        // $('.container').hide();
+        $('.sideboard').css("visibility","hidden")
+
+
+
+        $.post(`http://dirk-robberycreator/getPosition`, JSON.stringify({
+            type: "vec4"
+        }), function(data) {
+
+          if (data.type == "Offset") {
+            delete curRobs[rn].Objects[n].Pos
+          }
+          curRobs[rn].Objects[n][data.type] = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:0.0};
+           $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+                robName: rn,
+                Contents: curRobs[rn]
+            }))
+          setTimeout(function(){
+            $('.sideboard').css("visibility","visible")
+            $(oPos).css("color","green")
+            setTimeout(function(){
+              $(this).css("color","white");
+            },1500)
+            
+          },500)
+                
+        });
+      },500)
+    })  
+
+    //Rotation
+
+    let oRotLabel = $(`<label style="font-size:75%;"for="Spawn">Rotation</label>`).appendTo(pedEditC);
+    let oRot = $(`<i class="fa-solid fa-rotate"></i>`).appendTo(pedEditC);
+    $(oRot).css("margin-bottom","5px")
+    $(oRot).css("color","white");
+
+    $( oRot ).mouseout(function() {
+      $(this).css("color","white");
+    });
+
+    $( oRot ).mouseenter(function() {
+     $(this).css("color","rgba(45,85,255,0.77)");
+    });
+
+    $(oRot).click(function(){
+      if (curRobs[rn].Objects[n].Pos != false){
+        $(oRot).addClass('fa-spin-pulse');
+        setTimeout(function(){
+          $(oRot).removeClass('fa-spin-pulse');
+          // $('.container').hide();
+          $('.sideboard').css("visibility","hidden")
+
+          $.post(`http://dirk-robberycreator/getRotation`, JSON.stringify({
+              on: n,
+              rn: rn,
+              Object:true,
+          }), function(data) {
+            if (curRobs[rn].Objects[n].Offset){
+              curRobs[rn].Objects[n].Offset = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:data.pos.w};
+            }else{
+              curRobs[rn].Objects[n].Pos = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:data.pos.w};
+            }
+            
+
+           $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+                robName: rn,
+                Contents: curRobs[rn]
+            }))
+            setTimeout(function(){
+              $('.sideboard').css("visibility","visible")
+              $(oRot).css("color","green")
+              setTimeout(function(){
+                $(this).css("color","white");
+              },1500)
+    
+            },500)
+                  
+          });
+        },500)
+      }else{
+        Warning("You cannot set rotation until you have set position");
+      }
+    })  
+
+
+    if (newObjData[d.Type].Search != false){
+      let lTabT =  $(`<label style="font-size:75%;"for="Spawn">Loot Table:</label>`).appendTo(pedEditC);
+      Object.entries(curRobs[rn].Objects[n].SearchLoot).forEach(([name,d]) => {
+        let item = $(`<div style="display:flex; flex-direction:row; justify-items:stretch; align-items:center;"></div>`).appendTo(pedEditC);
+        let itemname = $(`<div>${name}</div>`).appendTo(item);
+        $(itemname).css("flex-grow", "3")
+        let itemedit = $(`<i style ="font-size:75%;" class="fa-solid fa-pencil"></i>`).appendTo(item);
+        $(itemedit).css("flex-grow", "1")
+        $(itemedit).css("color", "grey")
+
+        $( itemedit ).mouseout(function() {
+          $(this).css("color","grey");
+        });
+
+        $( itemedit ).mouseenter(function() {
+          $(this).css("color","rgba(255,255,255,0.77)");
+        });
+
+        $(itemedit).click(function(){
+          $(itemedit).addClass('fa-spin-pulse');
+          setTimeout(function(){
+            $(itemedit).removeClass('fa-spin-pulse');
+            EditLootTable(rn,n,name)
+          },250)
+        })
+
+
+
+        let delLootBut  = $(`<i class="fas fa-dumpster"></i>`).appendTo(item)
+        $(delLootBut).css("color","rgba(255,0,0,0.8)");
+        $(delLootBut).css("width","25%");
+
+        $( delLootBut ).mouseout(function() {
+          $(delLootBut).css("color","rgba(255,0,0,0.8)");
+        });
+
+        $( delLootBut ).mouseenter(function() {
+          $(delLootBut).css("color","rgba(255,0,0,1.5)");
+        });
+
+        $(delLootBut).click(function(){
+          delete curRobs[rn].Objects[n].SearchLoot[name] 
+          $(item).remove();
+          UpdateRobbery(rn)
+        });
+
+        $(item).css("width","90%");
+        $(item).css("text-align","center");
+        $(item).css("background-color","rgba(0,0,0,0.33)");
+        $(item).css("border-radius","2.5px");
+      });
+
+      let searchLootAdd = $(`<i class="fa-solid fa-circle-plus"></i>`).appendTo(pedEditC);
+      $(searchLootAdd).css("color","grey")
+
+      $( searchLootAdd ).mouseout(function() {
+        $(this).css("color","grey");
+      });
+
+      $( searchLootAdd ).mouseenter(function() {
+        $(this).css("color","white");
+      });
+
+
+      $(searchLootAdd).click(function(){
+        let newname = `New Item:${Math.floor(Math.random() * 999)}`;
+        curRobs[rn].Objects[n].SearchLoot[newname] = {
+          MinAmount:0,
+          MaxAmount:2, 
+          Chance:23, 
+        }
+        UpdateRobbery(rn)
+        EditObject(rn, n, curRobs[rn].Objects[n])
+      })
+
+
+    }
+
+  }
+
+
+
+
+  $(pedEditC).css("display","flex")
+  $(pedEditH).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(pedEditC).css("opacity","1.0")
+  },10)   
+
+  
+}
+
+EditLootTable = function(rn, n, ln){
+  $('.sideboard').empty();
+
+
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);    
+  let BackButton = $(`<div class='cButton1'><i class="fas fa-arrow-left"></i></div>`).appendTo(butCont)
+  // let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+
+  // // Save Current Settings
+  // $(SaveButton).click(function(){
+  //   // POST TO FIVEM SAVING THE SETTINGS YOU'VE CHANGED
+  //   $(SaveButton).empty();
+  //   $(`<i class="fa-solid fa-spinner fa-spin-pulse"></i>`).appendTo(SaveButton);
+  //   setTimeout(function(){
+  //     $(SaveButton).empty();
+  //     $(`<i class="fas fa-save">`).appendTo(SaveButton);
+  //   }, 1500)
+  // })
+
+
+  // Go Back
+  $(BackButton).click(function(){
+    EditObject(rn, n, curRobs[rn].Objects[n])
+  })
+
+
+  let searchEditor = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let searchEditH  = $(`<div class='cHeader'></div>`).appendTo(searchEditor);       
+  let searchEditT = $(`<div class='cLabel'>Item Settings</div>`).appendTo(searchEditH);  
+  let searchEditC = $(`<div class ='cContent'></div>`).appendTo(searchEditor);   
+  
+  let gItemLabel = $(`<label style="font-size:75%;"for="itemName">Reward Item</label>`).appendTo(searchEditC);
+  let gItemName = $(`<input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${ln}">`).appendTo(searchEditC);
+  $(gItemName).keypress(function() {
+    if ( event.which == 13 ) {
+      let newname = $(gItemName).val();
+      curRobs[rn].Objects[n].SearchLoot[newname] = curRobs[rn].Objects[n].SearchLoot[ln]
+      delete curRobs[rn].Objects[n].SearchLoot[ln]
+      EditLootTable(rn,n,newname)
+      UpdateRobbery(rn)
+    }
+  });
+
+  let gMinLabel = $(`<label style="font-size:75%;"for="itemMin">Min Amount: ${curRobs[rn].Objects[n].SearchLoot[ln].MinAmount}</label>`).appendTo(searchEditC);
+  let gMinSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=50 value=${curRobs[rn].Objects[n].SearchLoot[ln].MinAmount} type="range">`).appendTo(searchEditC);
+  $(gMinSlide).change(function(){
+    let newValue = $(gMinSlide).val();
+    curRobs[rn].Objects[n].SearchLoot[ln].MinAmount = newValue;    
+    $(gMinLabel).text(`Min Amount: ${newValue}`)
+    UpdateRobbery(rn)
+  })
+
+  let gMaxLabel = $(`<label style="font-size:75%;"for="gMax">Max Amount: ${curRobs[rn].Objects[n].SearchLoot[ln].MaxAmount}</label>`).appendTo(searchEditC);
+  let gMaxSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=50 value=${curRobs[rn].Objects[n].SearchLoot[ln].MaxAmount} type="range">`).appendTo(searchEditC);
+  $(gMaxSlide).change(function(){
+    let newValue = $(gMaxSlide).val();
+    curRobs[rn].Objects[n].SearchLoot[ln].MaxAmount = newValue;    
+    $(gMaxLabel).text(`Max Amount: ${newValue}`)
+    UpdateRobbery(rn)
+  })
+
+
+
+  let gChanceLabel = $(`<label style="font-size:75%;"for="gChance">Chance: ${curRobs[rn].Objects[n].SearchLoot[ln].Chance}</label>`).appendTo(searchEditC);
+  let gChanceSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=100 value=${curRobs[rn].Objects[n].SearchLoot[ln].Chance} type="range">`).appendTo(searchEditC);
+  $(gChanceSlide).change(function(){
+    let newChance = $(gChanceSlide).val();
+    curRobs[rn].Objects[n].SearchLoot[ln].Chance = newChance;    
+    $(gChanceLabel).text(`Chance: ${newChance}`)
+    UpdateRobbery(rn)
+  })
+
+
+  $(searchEditC).css("display","flex")
+  $(searchEditH).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(searchEditC).css("opacity","1.0")
+  },10)   
+
+
+}
+
+
+EditPed = function(rn,n,d){
+  $('.sideboard').empty();
+  if (!n) {
+
+    if (Array.isArray(curRobs[rn].Peds)){
+      curRobs[rn].Peds = {};
+    }
+
+    n = `New Ped:${Math.floor(Math.random() * 999)}`
+    curRobs[rn].Peds[n] = {
+      "Weapon": "NONE",
+      "Model": "ig_andreas",
+      "WepOut": false,
+      "Anim": "NONE",
+      "Pos": false,
+      "Rad": 5.0,
+      "Passive":false,
+      "TimeIn":0,
+      "TimeOut":24, 
+      "ChanceSpawn":100,
+      "Accuracy":50.0,       
+    }
+    d = curRobs[rn].Peds[n];
+  }
+
+
+
+
+
+  // BUTTONS
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);    
+  let BackButton = $(`<div class='cButton1'><i class="fas fa-arrow-left"></i></div>`).appendTo(butCont)
+  // let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+
+  // // Save Current Settings
+  // $(SaveButton).click(function(){
+  //   // POST TO FIVEM SAVING THE SETTINGS YOU'VE CHANGED
+  //   $(SaveButton).empty();
+  //   $(`<i class="fa-solid fa-spinner fa-spin-pulse"></i>`).appendTo(SaveButton);
+  //   setTimeout(function(){
+  //     $(SaveButton).empty();
+  //     $(`<i class="fas fa-save">`).appendTo(SaveButton);
+  //   }, 1500)
+  // })
+
+
+  // Go Back
+  $(BackButton).click(function(){
+    EditRobbery(rn)
+    $('.itemgrid').css("visibility","hidden");
+    $('.itemgrid').empty();
+  })
+
+
+  // Creating Card
+  let inhabEditor = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let inhabEditH  = $(`<div class='cHeader'></div>`).appendTo(inhabEditor);       
+  let inhabEditT = $(`<div class='cLabel'>Inhab Settings</div>`).appendTo(inhabEditH);  
+  let inhabEditC = $(`<div class ='cContent'></div>`).appendTo(inhabEditor);     
+
+
+  //
+
+
+
+  let pPosLabel = $(`<label style="font-size:75%;"for="Spawn">Position</label>`).appendTo(inhabEditC);
+  let pPos = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(inhabEditC);
+  $(pPos).css("margin-bottom","5px")
+  $(pPos).css("color","white");
+
+  $( pPos ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( pPos ).mouseenter(function() {
+   $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(pPos).click(function(){
+    $(pPos).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(pPos).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $('.sideboard').css("visibility","hidden")
+
+
+
+      $.post(`http://dirk-robberycreator/getPosition`, JSON.stringify({
+          type: "vec4"
+      }), function(data) {
+        if (data.type == "Offset") {
+          delete curRobs[rn].Peds[n].Pos
+        }
+        curRobs[rn].Peds[n][data.type] = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:0.0};
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))
+        setTimeout(function(){
+          $('.sideboard').css("visibility","visible")
+          $(pPos).css("color","green")
+          setTimeout(function(){
+            $(this).css("color","white");
+          },1500)
+
+          
+        },500)
+        EditPed(rn,n,curRobs[rn].Peds[n]);
+              
+      });
+    },500)
+  })  
+
+  if (curRobs[rn].Peds[n].Pos != false){
+     //Rotation
+
+  // Creating Contents
+  let PedIdLabel = $(`<label style="font-size:75%;"for="Spawn">Ped Label:</label>`).appendTo(inhabEditC);
+  let PedName = $(`
+         <input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${n}">`).appendTo(inhabEditC);
+    $(PedName).keypress(function() {
+      if ( event.which == 13 ) {
+        let newname = $(PedName).val();
+        if (!curRobs[rn].Peds[newname]){
+          curRobs[rn].Peds[newname] = curRobs[rn].Peds[n]
+          delete curRobs[rn].Peds[n]
+          // Post to Fivem
+           $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          })) 
+          EditPed(rn, newname, curRobs[rn].Peds[newname])
+        }else{
+          Warning("A ped with this name already exists try another name")
+        }
+      }
+      
+    });
+
+
+      let ModelButton = $(`<button class="button is-small  is-fullwidth is-link is-focused">Current Model: ${d.Model}</button>`).appendTo(inhabEditC)
+      $(ModelButton).click(function(){
+        $('.sideboard').css("visibility","hidden")
+        $('.itemgrid').css("visibility","visible");
+        $('.itemgrid').empty();
+
+        for (var i = 0; i < peds.length; i++) {
+          let newitem = $(`<div></div>`).appendTo('.itemgrid');
+          let pedname = peds[i];
+          $(newitem).css(`background-image`, `url('https://docs.fivem.net/peds/${peds[i]}.webp')`)
+          // $(newitem).css('width','auto')
+          $(newitem).css('height','175px')
+          $(newitem).css('background-size','100% 100%')
+
+          $( newitem ).mouseout(function() {
+            $(newitem).empty()
+          });
+
+          $( newitem ).mouseenter(function() {
+            $(`<div>${pedname}</div>`).appendTo(newitem);
+          });
+
+          if (pedname == curRobs[rn].Peds[n].Model){
+            $( newitem ).css({
+              '-webkit-box-shadow':'0px 0px 11px 2px rgba(255,255,255,0.78)',
+              '-moz-box-shadow': '0px 0px 11px 2px rgba(255,255,255,0.78)',
+              'box-shadow': '0px 0px 11px 2px rgba(255,255,255,0.78)',
+            })
+
+          }
+
+          $(newitem).click(function() {  
+            curRobs[rn].Peds[n].Model = pedname;
+            $(ModelButton).text(`Current Model: ${pedname}`)
+            // Post To FiveM for change of model.
+            $('.sideboard').css("visibility","visible")
+           $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))
+            $('.itemgrid').css("visibility","hidden");
+            $('.itemgrid').empty();
+          });
+        }
+
+      })
+
+      let pRotLabel = $(`<label style="font-size:75%;"for="Spawn">Rotation</label>`).appendTo(inhabEditC);
+      let pRot = $(`<i class="fa-solid fa-rotate"></i>`).appendTo(inhabEditC);
+      $(pRot).css("margin-bottom","5px")
+      $(pRot).css("color","white");
+
+      $( pRot ).mouseout(function() {
+        $(this).css("color","white");
+      });
+
+      $( pRot ).mouseenter(function() {
+       $(this).css("color","rgba(45,85,255,0.77)");
+      });
+
+      $(pRot).click(function(){
+        if (curRobs[rn].Peds[n].Pos != false){
+          $(pRot).addClass('fa-spin-pulse');
+          setTimeout(function(){
+            $(pRot).removeClass('fa-spin-pulse');
+            // $('.container').hide();
+            $('.sideboard').css("visibility","hidden")
+
+
+
+            $.post(`http://dirk-robberycreator/getRotation`, JSON.stringify({
+                on: n,
+                rn: rn,
+                Object:false,
+            }), function(data) {
+            if (curRobs[rn].Peds[n].Offset){
+              curRobs[rn].Peds[n].Offset = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:data.pos.w};
+            }else{
+              curRobs[rn].Peds[n].Pos = {x:data.pos.x, y:data.pos.y, z:data.pos.z, w:data.pos.w};
+            }
+             $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+                  robName: rn,
+                  Contents: curRobs[rn]
+              }))
+               
+              setTimeout(function(){
+                $('.sideboard').css("visibility","visible")
+                $(pRot).css("color","green")
+                setTimeout(function(){
+                  $(this).css("color","white");
+                },1500)
+
+
+              },500)
+                    
+            });
+          },500)
+        }else{
+          Warning("You cannot set rotation until you have set position");
+        }
+      })  
+
+
+
+
+
+      // //
+      let WepLabel = $(`<label style="font-size:75%;"for="Anim">Weapon</label>`).appendTo(inhabEditC);
+      let WepSelect = $(`<div class="select is-small"></div>`).appendTo(inhabEditC);
+      let WepOptsT = $(`<select></select>`).appendTo(WepSelect);
+
+
+      configWeapons.forEach((wep) => {
+        $(`<option>${wep}</option>`).appendTo(WepOptsT);
+      });
+      
+      $(WepOptsT).val(curRobs[rn].Peds[n].Weapon).change();
+
+      $(WepSelect).change(function(){
+        curRobs[rn].Peds[n].Weapon = (WepOptsT).val();
+        // POST TO FIVEM CHANGE PED
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))
+
+      })
+
+      // Passive
+
+      let pasLabel = $(`<label style="font-size:75%;"for="pasToggle">Passive</label>`).appendTo(inhabEditC);
+      let pasToggle = $(`<input id="pasToggle" type="checkbox" name="pasToggle" class="switch is-rounded is-success is-small"><label for="pasToggle"></label>`).appendTo(inhabEditC);
+
+      $(pasToggle).prop('checked', d.Passive);
+
+      $(pasToggle).change( function() {
+        curRobs[rn].Peds[n].Passive = !curRobs[rn].Peds[n].Passive
+        // POST TO FIVEM CHANGE PED
+       $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+            robName: rn,
+            Contents: curRobs[rn]
+        }))
+      });
+
+      // //
+      let WepOutLabel = $(`<label style="font-size:75%;"for="WepOutToggle">Weapon Visible</label>`).appendTo(inhabEditC);
+      let WepOutToggle = $(`<input id="WepOutToggle" type="checkbox" name="WepOutToggle" class="switch is-rounded is-success is-small"><label for="WepOutToggle"></label>`).appendTo(inhabEditC);
+
+      $(WepOutToggle).prop('checked', d.WepOut);
+
+      $(WepOutToggle).change( function() {
+        curRobs[rn].Peds[n].WepOut = !curRobs[rn].Peds[n].WepOut
+        // POST TO FIVEM CHANGE PED
+       $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+            robName: rn,
+            Contents: curRobs[rn]
+        }))
+      });
+      // //
+      let AnimLabel = $(`<label style="font-size:75%;"for="Anim">Animation</label>`).appendTo(inhabEditC);
+      let AnimSelect = $(`<div class="select is-small"></div>`).appendTo(inhabEditC);
+      let AnimOptsT = $(`      <select></select>`).appendTo(AnimSelect);
+
+      configAnims.forEach((anim) => {
+        $(`<option>${anim}</option>`).appendTo(AnimOptsT);
+      });
+      
+      $(AnimOptsT).val(curRobs[rn].Peds[n].Anim);
+
+      $(AnimSelect).change(function(){
+        curRobs[rn].Peds[n].Anim = (AnimOptsT).val();
+        // POST TO FIVEM CHANGE PED 
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))
+      })
+
+
+      //
+      let RadiusLabel  = $(`<label style="font-size:75%;"for="TimeOut">Hearing Radius: ${d.Rad} metres</label>`).appendTo(inhabEditC);
+      let RadiusSelect = $(`<input class="slider is-fullwidth is-small is-circle TimeOut" step=0.5 min=0 max=100 value=${d.Rad} type="range">`).appendTo(inhabEditC);
+      $(RadiusSelect).change(function(){
+        curRobs[rn].Peds[n].Rad = $(RadiusSelect).val()
+        UpdateRobbery(rn)
+        $(RadiusLabel).text(`Hearing Radius: ${$(RadiusSelect).val()} metres`)
+      })
+      // //
+
+
+
+      //
+      let AccuracyLabel  = $(`<label style="font-size:75%;"for="TimeOut">Weapon Accuracy: ${d.Accuracy}</label>`).appendTo(inhabEditC);
+      let AccuracySelect = $(`<input class="slider is-fullwidth is-small is-circle TimeOut" step=0.5 min=0 max=100 value=${d.Accuracy} type="range">`).appendTo(inhabEditC);
+      $(AccuracySelect).change(function(){
+        curRobs[rn].Peds[n].Accuracy = $(AccuracySelect).val()
+        UpdateRobbery(rn)
+        $(AccuracyLabel).text(`Weapon Accuracy: ${$(AccuracySelect).val()}`)
+      })
+      // //
+
+
+
+
+
+      let TimeInLabel  = $(`<label style="font-size:75%;"for="TimeIn">Time Active: ${d.TimeIn}</label>`).appendTo(inhabEditC);
+      let TimeInSelect = $(`<input class="slider is-fullwidth is-small is-circle TimeIn" step=1 min=0 max=24 value=${d.TimeIn} type="range">`).appendTo(inhabEditC);
+      $(TimeInSelect).change(function(){
+        curRobs[rn].Peds[n].TimeIn = $(TimeInSelect).val()
+        UpdateRobbery(rn)
+        $(TimeInLabel).text(`Time Active: ${$(TimeInSelect).val()}`)
+      })
+
+      //
+
+      let TimeOutLabel  = $(`<label style="font-size:75%;"for="TimeOut">Time Inactive: ${d.TimeOut}</label>`).appendTo(inhabEditC);
+      let TimeOutSelect = $(`<input class="slider is-fullwidth is-small is-circle TimeOut" step=1 min=0 max=24 value=${d.TimeOut} type="range">`).appendTo(inhabEditC);
+      $(TimeOutSelect).change(function(){
+        curRobs[rn].Peds[n].TimeOut = $(TimeOutSelect).val()
+         UpdateRobbery(rn)
+        $(TimeOutLabel).text(`Time Inactive: ${$(TimeOutSelect).val()}`)
+      })
+
+      //
+      let TimeChanceLabel  = $(`<label style="font-size:75%;"for="Chance">Chance of Spawn: ${d.ChanceSpawn}</label>`).appendTo(inhabEditC);
+      let TimeChanceSelect = $(`<input class="slider is-fullwidth is-small is-circle Chance" step=1 min=0 max=100 value=${d.ChanceSpawn} type="range">`).appendTo(inhabEditC);
+      $(TimeChanceSelect).change(function(){
+        curRobs[rn].Peds[n].ChanceSpawn = $(TimeChanceSelect).val()
+        UpdateRobbery(rn)
+        $(TimeChanceLabel).text(`Chance of Spawn: ${$(TimeChanceSelect).val()}`)
+      })
+
+  }
+
+ 
+
+
+  $(inhabEditC).css("display","flex")
+  $(inhabEditH).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(inhabEditC).css("opacity","1.0")
+  },10)   
+
+}
+
+var deleting = false;
+
+// List of robberies if click one loads up all settings. -- MUST lOAD THE CURRENT ROBBERIES
+ViewRobberies = function(){
+  // Get New Currob Data by callbck
+  $('.sideboard').css("visibility", "visible")
+  $('.sideboard').empty();
+  Object.entries(curRobs).forEach(([robn,d]) => {
+
+      let newRob  = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+      let header  = $(`<div style="border-radius:5px;" class='cHeader'></div>`).appendTo(newRob);       
+      let robTitle = $(`<div class='cLabel'>${robn}</div>`).appendTo(header);
+      
+
+
+
+
+
+      let editBut  = $(`<i class="fas fa-pencil-alt"></i>`).appendTo(header)
+      $(editBut).css("width","25%");
+      $(editBut).css("color","grey");
+
+      $( editBut ).mouseout(function() {
+        $(editBut).css("color","grey");
+      });
+
+      $( editBut ).mouseenter(function() {
+        $(editBut).css("color","white");
+      });
+
+      $(editBut).click(function(){
+        EditRobbery(robn);
+      });    
+
+      let delBut  = $(`<i class="fas fa-dumpster"></i>`).appendTo(header)
+      $(delBut).css("color","rgba(255,0,0,0.8)");
+      $(delBut).css("width","25%");
+
+      $( delBut ).mouseout(function() {
+        $(delBut).css("color","rgba(255,0,0,0.8)");
+      });
+
+      $( delBut ).mouseenter(function() {
+        $(delBut).css("color","rgba(255,0,0,1.5)");
+      });
+
+      $(delBut).click(function(){
+        if (!deleting){
+          deleting = true;
+
+          $.post(`http://dirk-robberycreator/DeleteRobbery`, JSON.stringify({rn:robn}));
+
+          delete curRobs[robn] 
+          UpdateRobbery(robn)
+          deleting = false;
+          ViewRobberies()
+        }else {
+          Warning("Slow Down Tiger")
+        }
+
+      });  
+
+  });
+
+  let newRob  = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let header  = $(`<div style="border-radius:5px;" class='cHeader'></div>`).appendTo(newRob);       
+  let robTitle = $(`<div class='cLabel'><i class="fa-solid fa-circle-plus"></i></div>`).appendTo(header);
+
+  $(header).click(function(){
+    if (!curRobs["New Robbery"]){
+      newName = "New Robbery";
+    }else{
+      
+      if (!curRobs["New Robbery (1)"]){
+        newName = "New Robbery (1)";
+      } else {
+        newName = `New Robbery (${Math.floor(Math.random() * 100)})`
+      }
+    }
+
+    curRobs[newName] = {
+      Enabled:false,
+      CopCount:0,
+      CoolDown:0,      
+      Blip:false,
+      Garage:{
+        CarClass:'A',
+        CarLoc:false,
+        DoorLoc:false,
+        Enabled:false,
+      },
+      Objects:{},
+      Peds:{},
+      //MLO Specific
+      Doors:{},
+      // Shell Specific
+      Shell:false, // Can be a shell name if using one here. TOGGLE
+      DoorMiniGame:'NONE',
+      ShellDefaultSettings:'NONE',
+    };
+
+   $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+        robName: newName,
+        Contents: curRobs[newName]
+    }))
+
+    EditRobbery(newName)
+  })
+
+  $( header ).mouseout(function() {
+    $(header).css("background-color","rgba(0,0,0,0.44)");
+  });
+
+  $( header ).mouseenter(function() {
+    $(header).css("background-color","rgba(0,0,0,0.88)");
+  });
+
+}
+
+UpdateRobbery = function(robn){
+   $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+      robName: robn,
+      Contents: curRobs[robn]
+  }))
+}
+
+EditRobbery = function(robn){
+  $('.sideboard').empty();
+
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);     
+  let BackButton = $(`<div class='cButton1'><i class="fas fa-arrow-left"></i></div>`).appendTo(butCont)
+  let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+  $(SaveButton).click(function(){
+     $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+          robName: robn,
+          Contents: curRobs[robn]
+      }))
+    // POST TO FIVEM SAVING THE SETTINGS YOU'VE CHANGED
+    $(SaveButton).empty();
+    $(`<i class="fa-solid fa-spinner fa-spin-pulse"></i>`).appendTo(SaveButton);
+    setTimeout(function(){
+    $(SaveButton).empty();
+    $(`<i class="fas fa-save">`).appendTo(SaveButton);
+    }, 500)
+  })
+
+  $(BackButton).click(function(){
+    ViewRobberies(); 
+  })
+
+  let baseSettings  = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let baseHeader  = $(`<div class='cHeader'></div>`).appendTo(baseSettings);       
+  let baseTitle = $(`<div class='cLabel'>Base Settings</div>`).appendTo(baseHeader);  
+  let baseCont = $(` <div class ='cContent'></div>`).appendTo(baseSettings)   
+
+
+  let RobName = $(`
+       <input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${robn}">`).appendTo(baseCont);
+  $(RobName).keypress(function() {
+    if ( event.which == 13 ) {
+      let newname = $(RobName).val();
+      if (!curRobs[newname]){
+        curRobs[newname] = curRobs[robn]
+        delete curRobs[robn]
+        $.post(`http://dirk-robberycreator/NameChange`, JSON.stringify({
+          oldname: robn, 
+          newname:newname,
+          Contents:curRobs[newname]  
+        }))
+        EditRobbery(newname)
+      }else{
+        Warning("A robbery with this name already exists.")
+      }
+    }
+    
+  });
+
+
+  let disLabel = $(`<label style="font-size:75%;"for="Enabled">Enabled</label>`).appendTo(baseCont);
+  let disTog = $(`<input id="disTog" type="checkbox" name="disTog" class="switch is-rounded is-success is-small"><label for="disTog"></label>`).appendTo(baseCont);
+
+  $(disTog).prop('checked', curRobs[robn].Enabled);
+
+  $(disTog).change( function() {
+
+    if (curRobs[robn].Enabled == false) {
+      curRobs[robn].Enabled = true
+    } else if (curRobs[robn].Enabled != false) {
+      curRobs[robn].Enabled = false
+    }
+    $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+      robName: robn,
+      Contents: curRobs[robn]
+    }))
+
+  });
+
+  let coolLabel = $(`<label style="font-size:75%;"for="Cooldown">Cooldown</label>`).appendTo(baseCont);
+  $(coolLabel).text(`Cooldown: ${curRobs[robn].CoolDown} Minutes`)
+  let coolSlide = $(`
+    <input class="slider is-fullwidth is-small is-circle Cooldown" step=1 min=0 max=120 value=${curRobs[robn].CoolDown} type="range">`).appendTo(baseCont);
+  $(coolSlide).change(function(){
+    curRobs[robn].CoolDown = $(coolSlide).val()
+    $(coolLabel).text(`Cooldown: ${$(coolSlide).val()} Minutes`)
+  })
+
+
+  let cCounLab = $(`<label style="font-size:75%;"for="CopCount">Cop Count</label>`).appendTo(baseCont);
+  $(cCounLab).text(`Cop Count: ${curRobs[robn].CopCount}`)
+  let copSlide = $(`
+    <input class="slider is-fullwidth is-small is-circle CopCount" step=1 min=0 max=20 value=${curRobs[robn].CopCount} type="range">`).appendTo(baseCont);
+  $(copSlide).change(function(){
+    curRobs[robn].CopCount = $(copSlide).val()
+    $(cCounLab).text(`Cop Count: ${$(copSlide).val()}`)
+  })
+
+  $(baseCont).css("display","flex")
+  $(baseHeader).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(baseCont).css("opacity","1.0")
+  },10) 
+
+  // BLIP SETTINGS
+  let blipSettings  = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let blipHeader  = $(`<div class='cHeader'></div>`).appendTo(blipSettings);       
+  
+  let blipTitle = $(`<div class='cLabel'>Blip</div>`).appendTo(blipHeader);  
+  let blipCont = $(` <div class ='cContent'></div>`).appendTo(blipSettings)   
+  let blipTog = $(`<input id="blipTog" type="checkbox" name="blipTog" class="switch is-rounded is-success is-small"><label for="blipTog"></label>`).appendTo(blipHeader);
+
+  $(blipTog).change( function() {
+    $(blipCont).empty()
+    if ($(blipTog).prop('checked') == true) {
+      if (!curRobs[robn].Blip){
+        curRobs[robn].Blip = {
+          Pos:false,
+          Scale:0.8, 
+          Sprite:300, 
+          Color:23,
+        }        
+      }
+
+
+
+
+      // Position Setter
+      let BlipLoc = $(`<label style="font-size:75%;"for="Spawn">Blip Location</label>`).appendTo(blipCont);
+      let blipLocBut = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(blipCont);
+      $(BlipLoc).css("color","white");
+      $(BlipLoc).css("margin-bottom","5px")
+
+      $( blipLocBut ).mouseout(function() {
+        $(this).css("color","white");
+      });
+
+      $( blipLocBut ).mouseenter(function() {
+        $(this).css("color","rgba(45,85,255,0.77)");
+      });
+
+      $(blipLocBut).click(function(){
+        $(blipLocBut).addClass('fa-spin-pulse');
+        setTimeout(function(){
+          $(blipLocBut).removeClass('fa-spin-pulse');
+          // $('.container').hide();
+          $('.sideboard').css("visibility","hidden")
+
+
+
+          $.post(`http://dirk-robberycreator/getposh`, JSON.stringify({
+              type: "vec4"
+          }), function(data) {
+            setTimeout(function(){
+              $('.sideboard').css("visibility","visible")
+              $(blipLocBut).css("color","green")
+              setTimeout(function(){
+                $(blipLocBut).css("color","white");
+              },1500)
+              curRobs[robn].Blip.Pos = data;
+              UpdateRobbery(robn)
+            },500)
+                  
+          });
+
+        },500)
+      })
+
+      //Scale Slider
+      let scaleLabel = $(`<label style="font-size:75%;"for="tiny">Scale: ${curRobs[robn].Blip.Scale}</label>`).appendTo(blipCont);
+      let scaleSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=0.05 min=0.0 max=1.2 value=${curRobs[robn].Blip.Scale} type="range">`).appendTo(blipCont);
+
+      $(scaleSlide).change(function(){
+        let newValue = $(scaleSlide).val();
+        curRobs[robn].Blip.Scale = newValue;    
+        $(scaleLabel).text(`Scale: ${newValue}`)
+        UpdateRobbery(robn)
+      })
+
+      //Sprite Input
+      let SpriteLabel = $(`<label style="font-size:75%;"for="tiny">Sprite:</label>`).appendTo(blipCont);
+      let SpriteInput = $(`<input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${curRobs[robn].Blip.Sprite}">`).appendTo(blipCont);
+      $(SpriteInput).change(function() {
+        curRobs[robn].Blip.Sprite = $(SpriteInput).val();
+        UpdateRobbery(robn)
+      }); 
+
+
+      //Color Input
+      let ColLabel = $(`<label style="font-size:75%;"for="tiny">Color:</label>`).appendTo(blipCont);
+      let ColInput = $(`<input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${curRobs[robn].Blip.Color}">`).appendTo(blipCont);
+      $(ColInput).change(function() {
+
+        curRobs[robn].Blip.Color = $(ColInput).val();
+        UpdateRobbery(robn)
+      
+      }); 
+
+
+
+
+      $(blipCont).css("display","flex")
+      $(blipHeader).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(blipCont).css("opacity","1.0")
+      },10)   
+    } else if ((blipTog).prop('checked') == false) {
+
+      setTimeout(function(){
+        $(blipCont).empty()
+        $(blipCont).css("opacity","0")
+      },10)
+      $(blipHeader).css("background-color","rgba(0,0,0,0.44)")
+      $(blipCont).css("display", "none")
+      curRobs[robn].Blip = false
+    }
+  });
+
+  if (curRobs[robn].Blip != false){
+    $(blipTog).prop('checked', true);
+    $(blipTog).trigger('change');
+  }
+
+  // Shell
+  let shellCollap = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let shellHeader  = $(`<div class='cHeader'></div>`).appendTo(shellCollap);       
+  let shellTitle = $(`<div class='cLabel'>Shell</div>`).appendTo(shellHeader);  
+  let shellCont = $(` <div class ='cContent'></div>`).appendTo(shellCollap) 
+  let shellcurtog = false;
+  let shellTog = $(`<input id="shellSwitch" type="checkbox" name="shellSwitch" class="switch is-rounded is-success is-small"><label for="shellSwitch"></label>`).appendTo(shellHeader);
+  if (curRobs[robn].Shell != false){
+    shellcurtog = true
+  }
+
+  
+  $(shellTog).prop('checked', shellcurtog);
+
+
+  if (shellcurtog == true){
+    $(shellCont).css("display","flex")
+    $(shellHeader).css("background-color","rgba(0,0,0,0.88)")
+    setTimeout(function(){
+      $(shellCont).css("opacity","1.0")
+    },10)          
+  }
+
+
+  let shellNameLabel = $(`<label style="font-size:75%;"for="shells">Shell Name</label>`).appendTo(shellCont);
+  let shellNameSelect= $(`<select style="text-align:center;" name="shells" id="shells"></select>`).appendTo(shellCont);
+
+  // let shellPreset = $(`<label style="font-size:75%;"for="shells">Shell Preset</label>`).appendTo(shellCont);
+  // let shellPresetSelect= $(`<select style="text-align:center;" name="shells" id="shells"></select>`).appendTo(shellCont);
+
+  let shellDoorGame = $(`<label style="font-size:75%;"for="shells">Door Minigame</label>`).appendTo(shellCont);
+  let shellGameSelect= $(`<select name="shells style="text-align:center;" id="shells"></select>`).appendTo(shellCont);
+
+
+
+  Object.entries(DoorMiniGames).forEach(([gName,da]) => {
+    $(`<option>${da}</option>`).appendTo(shellGameSelect);
+    
+  });
+
+
+  $(shellGameSelect).change(function(){
+    curRobs[robn].DoorMiniGame = $(shellGameSelect).val();
+    UpdateRobbery(robn)
+  })
+
+  $(shellGameSelect).val(curRobs[robn].DoorMiniGame);
+
+  Object.entries(ShellSettings).forEach(([shelln,shelld]) => {
+    $(`<option>${shelln}</option>`).appendTo(shellNameSelect);
+    $(`<option>NONE</option>`).appendTo(shellNameSelect);
+  });
+  if (curRobs[robn].Shell && curRobs[robn].Shell != 'NONE'){
+    // Object.entries(ShellSettings[curRobs[robn].Shell]).forEach(([defn,defd]) => {
+    //   $(`<option>${defn}</option>`).appendTo(shellPresetSelect);
+    // });
+    // $(`<option>NONE</option>`).appendTo(shellPresetSelect);
+    // $(shellPresetSelect).val(curRobs[robn].ShellDefaultSettings).change();
+    $(shellNameSelect).val(curRobs[robn].Shell).change();    
+  }
+
+  $(shellNameSelect).change(function(){
+    curRobs[robn].Shell = $(shellNameSelect).val();
+          UpdateRobbery(robn)
+    // $(shellPresetSelect).empty();
+    // $(`<option>NONE</option>`).appendTo(shellPresetSelect);
+    if (curRobs[robn].Shell != 'NONE'){
+      // Object.entries(ShellSettings[curRobs[robn].Shell]).forEach(([defn,defd]) => {
+      //   $(`<option>${defn}</option>`).appendTo(shellPresetSelect);
+      // });
+
+    }
+  })
+
+  $(shellNameSelect).val(curRobs[robn].Shell);
+
+  $(shellTog).change( function() {
+    if (curRobs[robn].Shell == false) {
+      curRobs[robn].Shell = 'NONE'
+      UpdateRobbery(robn)
+
+      
+      $(shellNameSelect).empty();
+      $(`<option>NONE</option>`).appendTo(shellNameSelect);
+      $(shellNameSelect).val('NONE').change();
+      Object.entries(ShellSettings).forEach(([shelln,shelld]) => {
+        $(`<option>${shelln}</option>`).appendTo(shellNameSelect);
+      });
+      $(shellCont).css("display","flex")
+      $(shellHeader).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(shellCont).css("opacity","1.0")
+      },10)
+    } else if (curRobs[robn].Shell != false) {
+
+      setTimeout(function(){
+        $(shellCont).css("opacity","0")
+      },10)
+      $(shellHeader).css("background-color","rgba(0,0,0,0.44)")
+      $(shellCont).css("display", "none")
+      curRobs[robn].Shell = false
+      UpdateRobbery(robn)
+    }
+  });
+
+
+
+  // $(shellPresetSelect).val(curRobs[robn].ShellDefaultSettings);
+
+  // $(shellPresetSelect).change(function(){
+  //   curRobs[robn].ShellDefaultSettings = $(shellPresetSelect).val();
+  // })
+
+
+
+
+  let shellDoor = $(`<label style="font-size:75%;"for="Spawn">Shell Door</label>`).appendTo(shellCont);
+  let shellDoorLoc = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(shellCont);
+  $(shellDoorLoc).css("color","white");
+  $(shellDoorLoc).css("margin-bottom","5px")
+
+  $( shellDoorLoc ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( shellDoorLoc ).mouseenter(function() {
+    $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(shellDoorLoc).click(function(){
+    $(shellDoorLoc).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(shellDoorLoc).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $('.sideboard').css("visibility","hidden")
+      $.post(`http://dirk-robberycreator/getposh`, JSON.stringify({
+          type: "vec4"
+      }), function(data) {
+        setTimeout(function(){
+          $('.sideboard').css("visibility","visible")
+          $(shellDoorLoc).css("color","green")
+          setTimeout(function(){
+            $(this).css("color","white");
+          },1500)
+          curRobs[robn].Door = data;
+          UpdateRobbery(robn)
+        },500)
+              
+      });
+
+    },500)
+  })
+
+
+  let ShellExitLabel = $(`<label style="font-size:75%;"for="Spawn">Shell Exit</label>`).appendTo(shellCont);
+  let shellExitLoc = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(shellCont);
+  $(shellExitLoc).css("color","white");
+  $(shellExitLoc).css("margin-bottom","5px")
+
+  $( shellExitLoc ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( shellExitLoc ).mouseenter(function() {
+    $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(shellExitLoc).click(function(){
+    $(shellExitLoc).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(shellExitLoc).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $.post(`http://dirk-robberycreator/getoffset`, JSON.stringify({
+          type: "vec4"
+      }), function(data) {
+        if (data != "NotInShell"){
+          setTimeout(function(){
+            $(shellExitLoc).css("color","green")
+            setTimeout(function(){
+              $(this).css("color","white");
+            },1500)
+            curRobs[robn].ShellExit = data;
+            UpdateRobbery(robn)
+          },500)
+        }else{
+          Warning("You need to be inside a shell to set the exit")
+        }
+
+              
+      });
+
+    },500)
+  })
+
+  // GARAGE SECTION
+
+  let garageCollap = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let garHeader  = $(`<div class='cHeader'></div>`).appendTo(garageCollap);       
+  let garTitle = $(`<div class='cLabel'>Garage</div>`).appendTo(garHeader);  
+  let garCont = $(` <div class ='cContent'></div>`).appendTo(garageCollap) 
+
+  let garTog = $(`<input id="garSwitch" type="checkbox" name="garSwitch" class="switch is-rounded is-success is-small"><label for="garSwitch"></label>`).appendTo(garHeader);
+  $(garTog).prop('checked', curRobs[robn].Garage.Enabled);
+
+
+  if (curRobs[robn].Garage.Enabled == true){
+    $(garCont).css("display","flex")
+    $(garHeader).css("background-color","rgba(0,0,0,0.88)")
+    setTimeout(function(){
+      $(garCont).css("opacity","1.0")
+    },10)          
+  }
+
+  $(garTog).change( function() {
+    if (curRobs[robn].Garage.Enabled == false) {
+      curRobs[robn].Garage.Enabled = true
+
+      $(garCont).css("display","flex")
+      $(garHeader).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(garCont).css("opacity","1.0")
+      },10)
+    } else if (curRobs[robn].Garage.Enabled == true) {
+      setTimeout(function(){
+        $(garCont).css("opacity","0")
+      },10)
+      $(garHeader).css("background-color","rgba(0,0,0,0.44)")
+      $(garCont).css("display", "none")
+      curRobs[robn].Garage.Enabled = false
+    }
+  });
+
+
+  let gClassLabel = $(`<label style="font-size:75%;"for="cars">Car Class</label>`).appendTo(garCont);
+  let gClassSelect= $(`<select name="cars" id="cars">Car Class</select>`).appendTo(garCont);
+  
+  for (var i = carClasses.length - 1; i >= 0; i--) {
+    $(`<option>${carClasses[i]}</option>`).appendTo(gClassSelect);
+  }
+  $(gClassSelect).val(curRobs[robn].Garage.CarClass).change();
+
+  $(gClassSelect).change(function(){
+    curRobs[robn].Garage.CarClass = $(gClassSelect).val();
+  })
+
+  let gCarLocLabel = $(`<label style="font-size:75%;"for="Spawn">Car Spawn</label>`).appendTo(garCont);
+  let gCarLoc = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(garCont);
+  $(gCarLoc).css("color","white");
+ 
+
+  let gGarLocLabel = $(`<label style="font-size:75%;"for="Spawn">Garage Loc</label>`).appendTo(garCont);
+  let gGarLoc = $(`<i class="fa-solid fa-location-dot"></i>`).appendTo(garCont);
+  $(gGarLoc).css("margin-bottom","5px")
+  $(gGarLoc).css("color","white");
+
+  $( gGarLoc ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( gGarLoc ).mouseenter(function() {
+   $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(gGarLoc).click(function(){
+    $(gGarLoc).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(gGarLoc).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $('.sideboard').css("visibility","hidden")
+
+
+
+      $.post(`http://dirk-robberycreator/getposh`, JSON.stringify({
+          type: "vec4"
+      }), function(data) {
+        setTimeout(function(){
+          $('.sideboard').css("visibility","visible")
+          $(gGarLoc).css("color","green")
+          setTimeout(function(){
+            $(this).css("color","white");
+          },1500)
+          curRobs[robn].Garage.DoorLoc = data;
+          UpdateRobbery(robn)
+        },500)
+              
+      });
+
+    },500)
+  })
+
+
+  $( gCarLoc ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( gCarLoc ).mouseenter(function() {
+    $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(gCarLoc).click(function(){
+    $(gCarLoc).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(gCarLoc).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $('.sideboard').css("visibility","hidden")
+
+
+
+      $.post(`http://dirk-robberycreator/getposh`, JSON.stringify({
+          type: "vec4"
+      }), function(data) {
+        setTimeout(function(){
+          $('.sideboard').css("visibility","visible")
+          $(gCarLoc).css("color","green")
+          setTimeout(function(){
+            $(this).css("color","white");
+          },1500)
+          curRobs[robn].Garage.CarLoc = data;
+          UpdateRobbery(robn)
+        },500)
+              
+      });
+
+    },500)
+  })
+
+
+
+  let inhabCollap = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let inhabHeader  = $(`<div class='cHeader'></div>`).appendTo(inhabCollap);       
+  let inhabTitle = $(`<div class='cLabel'>Peds</div>`).appendTo(inhabHeader);  
+  let inhabCont = $(` <div class ='cContent'></div>`).appendTo(inhabCollap)      
+
+  $(inhabCont).css("display","flex")
+  $(inhabHeader).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(inhabCont).css("opacity","1.0")
+  },10)   
+
+  Object.entries(curRobs[robn].Peds).forEach(([name,habd]) => {
+    let inhab = $(`<div style="display:flex; flex-direction:row; justify-items:stretch; align-items:center;"></div>`).appendTo(inhabCont);
+    let inhabname = $(`<div>${name}</div>`).appendTo(inhab);
+    $(inhabname).css("flex-grow", "3")
+    
+    let inhabedit = $(`<i style ="font-size:75%;" class="fa-solid fa-pencil"></i>`).appendTo(inhab);
+    $(inhabedit).css("flex-grow", "1")
+    $(inhabedit).css("color", "grey")
+
+    $( inhabedit ).mouseout(function() {
+      $(this).css("color","grey");
+    });
+
+    $( inhabedit ).mouseenter(function() {
+      $(this).css("color","rgba(255,255,255,0.77)");
+    });
+
+    $(inhabedit).click(function(){
+      $(inhabedit).addClass('fa-spin-pulse');
+      setTimeout(function(){
+        $(inhabedit).removeClass('fa-spin-pulse');
+        EditPed(robn,name,habd); // Edit Ped Page
+      },250)
+    })
+
+
+
+    let delBut  = $(`<i class="fas fa-dumpster"></i>`).appendTo(inhab)
+    $(delBut).css("color","rgba(255,0,0,0.8)");
+    $(delBut).css("width","25%");
+
+    $( delBut ).mouseout(function() {
+      $(delBut).css("color","rgba(255,0,0,0.8)");
+    });
+
+    $( delBut ).mouseenter(function() {
+      $(delBut).css("color","rgba(255,0,0,1.5)");
+    });
+
+    $(delBut).click(function(){
+      delete curRobs[robn].Peds[name] 
+      UpdateRobbery(robn)
+      EditRobbery(robn)
+    });
+
+    $(inhab).css("width","90%");
+    $(inhab).css("text-align","center");
+    $(inhab).css("background-color","rgba(0,0,0,0.33)");
+    $(inhab).css("border-radius","2.5px");
+  });
+
+  let InhabAddButton = $(`<i class="fa-solid fa-circle-plus"></i>`).appendTo(inhabCont);
+  $(InhabAddButton).css("color","grey")
+
+  $( InhabAddButton ).mouseout(function() {
+    $(this).css("color","grey");
+  });
+
+  $( InhabAddButton ).mouseenter(function() {
+    $(this).css("color","white");
+  });
+
+
+  $(InhabAddButton).click(function(){
+    EditPed(robn);
+  })
+
+  // OBJECTS
+  let objCollap = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let objHeader  = $(`<div class='cHeader'></div>`).appendTo(objCollap);       
+  let objTitle = $(`<div class='cLabel'>Objects</div>`).appendTo(objHeader);  
+  let objCont = $(`<div class ='cContent'></div>`).appendTo(objCollap)      
+
+  $(objCont).css("display","flex")
+  $(objHeader).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(objCont).css("opacity","1.0")
+  },10)   
+
+  Object.entries(curRobs[robn].Objects).forEach(([name,objd]) => {
+    let obj = $(`<div style="display:flex; flex-direction:row; justify-items:stretch; align-items:center;"></div>`).appendTo(objCont);
+    let objname = $(`<div>${name}</div>`).appendTo(obj);
+    $(objname).css("flex-grow", "3")
+    
+    let objedit = $(`<i style ="font-size:75%;" class="fa-solid fa-pencil"></i>`).appendTo(obj);
+    $(objedit).css("flex-grow", "1")
+    $(objedit).css("color", "grey")
+    $(objedit).css("bac", "grey")
+
+    $( objedit ).mouseout(function() {
+      $(this).css("color","grey");
+    });
+
+    $( objedit ).mouseenter(function() {
+      $(this).css("color","rgba(255,255,255,0.77)");
+    });
+
+    $(objedit).click(function(){
+      $(objedit).addClass('fa-spin-pulse');
+      setTimeout(function(){
+        $(objedit).removeClass('fa-spin-pulse');
+        EditObject(robn,name,objd); // Edit Ped Page
+      },400)
+    })
+
+
+    let delBut  = $(`<i class="fas fa-dumpster"></i>`).appendTo(obj)
+    $(delBut).css("color","rgba(255,0,0,0.8)");
+    $(delBut).css("width","25%");
+
+    $( delBut ).mouseout(function() {
+      $(delBut).css("color","rgba(255,0,0,0.8)");
+    });
+
+    $( delBut ).mouseenter(function() {
+      $(delBut).css("color","rgba(255,0,0,1.5)");
+    });
+
+    $(delBut).click(function(){
+      delete curRobs[robn].Objects[name] 
+      EditRobbery(robn)
+      $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+          robName: robn, 
+          Contents: curRobs[robn]
+      })) 
+    });
+
+
+    $(obj).css("width","90%");
+    $(obj).css("text-align","center");
+    $(obj).css("background-color","rgba(0,0,0,0.33)");
+    $(obj).css("border-radius","2.5px");
+  });
+
+  let AddButton = $(`<i class="fa-solid fa-circle-plus"></i>`).appendTo(objCont);
+  $(AddButton).css("color","grey")
+
+  $( AddButton ).mouseout(function() {
+    $(this).css("color","grey");
+  });
+
+  $( AddButton ).mouseenter(function() {
+    $(this).css("color","white");
+  });
+
+  $(AddButton).click(function(){
+    EditObject(robn);
+  })
+
+
+
+  /// DOORS
+  let doorCollap = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let doorHeader  = $(`<div class='cHeader'></div>`).appendTo(doorCollap);       
+  let doorTitle = $(`<div class='cLabel'>Doors</div>`).appendTo(doorHeader);  
+  let doorCont = $(`<div class ='cContent'></div>`).appendTo(doorCollap)      
+
+  $(doorCont).css("display","flex")
+  $(doorHeader).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(doorCont).css("opacity","1.0")
+  },10)   
+
+  Object.entries(curRobs[robn].Doors).forEach(([name,doord]) => {
+    let door = $(`<div style="display:flex; flex-direction:row; justify-items:stretch; align-items:center;"></div>`).appendTo(doorCont);
+    let doorname = $(`<div>${name}</div>`).appendTo(door);
+    $(doorname).css("flex-grow", "3")
+    
+    let dooredit = $(`<i style ="font-size:75%;" class="fa-solid fa-pencil"></i>`).appendTo(door);
+    $(dooredit).css("flex-grow", "1")
+    $(dooredit).css("color", "grey")
+    $(dooredit).css("bac", "grey")
+
+    $( dooredit ).mouseout(function() {
+      $(this).css("color","grey");
+    });
+
+    $( dooredit ).mouseenter(function() {
+      $(this).css("color","rgba(255,255,255,0.77)");
+    });
+
+    $(dooredit).click(function(){
+      $(dooredit).addClass('fa-spin-pulse');
+      setTimeout(function(){
+        $(dooredit).removeClass('fa-spin-pulse');
+          EditDoor(robn, name, doord); // Edit Ped Page
+      },250)
+    })
+
+    let delBut  = $(`<i class="fas fa-dumpster"></i>`).appendTo(door)
+    $(delBut).css("color","rgba(255,0,0,0.8)");
+    $(delBut).css("width","25%");
+
+    $( delBut ).mouseout(function() {
+      $(delBut).css("color","rgba(255,0,0,0.8)");
+    });
+
+    $( delBut ).mouseenter(function() {
+      $(delBut).css("color","rgba(255,0,0,1.5)");
+    });
+
+    $(delBut).click(function(){
+      delete curRobs[robn].Doors[name] 
+      EditRobbery(robn)
+      $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+          robName: robn,
+          Contents: curRobs[robn]
+      })) 
+
+    });
+
+
+    $(door).css("width","90%");
+    $(door).css("text-align","center");
+    $(door).css("background-color","rgba(0,0,0,0.33)");
+    $(door).css("border-radius","2.5px");
+  });
+
+  let DoorAddButton = $(`<i class="fa-solid fa-circle-plus"></i>`).appendTo(doorCont);
+  $(DoorAddButton).css("color","grey")
+
+  $( DoorAddButton ).mouseout(function() {
+    $(this).css("color","grey");
+  });
+
+  $( DoorAddButton ).mouseenter(function() {
+    $(this).css("color","white");
+  });
+
+  $(DoorAddButton).click(function(){
+    EditDoor(robn);
+  })
+}
+
+
+EditDoor = function(rn,n,d){
+  $('.sideboard').empty();
+  if (!n) {
+    if (Array.isArray(curRobs[rn].Doors)){
+      curRobs[rn].Doors = {};
+    }
+
+    n = `New Doors:${Math.floor(Math.random() * 9999)}`
+    curRobs[rn].Doors[n] = {
+      "ctrlPoint":{x:1,y:1,z:1},
+      "Minigame":'NONE',
+      "doorObjects":{
+        "12313123":{
+          "pos":{x:1,y:1,z:1,w:1},
+        },
+      },     
+    }
+    d = curRobs[rn].Doors[n];
+  }
+
+
+
+
+
+  // BUTTONS
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);    
+  let BackButton = $(`<div class='cButton1'><i class="fas fa-arrow-left"></i></div>`).appendTo(butCont)
+  // let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+
+  // // Save Current Settings
+  // $(SaveButton).click(function(){
+  //   // POST TO FIVEM SAVING THE SETTINGS YOU'VE CHANGED
+  //   $(SaveButton).empty();
+  //   $(`<i class="fa-solid fa-spinner fa-spin-pulse"></i>`).appendTo(SaveButton);
+  //   setTimeout(function(){
+  //     $(SaveButton).empty();
+  //     $(`<i class="fas fa-save">`).appendTo(SaveButton);
+  //   }, 1500)
+  // })
+
+
+  // Go Back
+  $(BackButton).click(function(){
+    EditRobbery(rn)
+    $('.itemgrid').css("visibility","hidden");
+    $('.itemgrid').empty();
+  })
+
+
+  // Creating Card
+  let doorEditor = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let doorEditH  = $(`<div class='cHeader'></div>`).appendTo(doorEditor);       
+  let doorEditT = $(`<div class='cLabel'>Door Settings</div>`).appendTo(doorEditH);  
+  let doorEditC = $(`<div class ='cContent'></div>`).appendTo(doorEditor);     
+  // Creating Contents
+  let DoorName = $(`<input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${n}">`).appendTo(doorEditC);
+  $(DoorName).keypress(function() {
+    if ( event.which == 13 ) {
+      let newname = $(DoorName).val();
+      if (!curRobs[rn].Doors[newname]){
+        curRobs[rn].Doors[newname] = curRobs[rn].Doors[n]
+        delete curRobs[rn].Doors[n]
+        // Post to Fivem
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+            robName: rn,
+            Contents: curRobs[rn]
+        })) 
+        EditDoor(rn, newname, curRobs[rn].Doors[newname])
+      }else{
+        Warning("A ped with this name already exists try another name")
+      }
+    }
+    
+  }); 
+
+
+  let doorsLabel = $(`<label style="font-size:75%;"for="Spawn">Position</label>`).appendTo(doorEditC);
+  let doorsPos = $(`<i class="fa-solid fa-door-closed"></i>`).appendTo(doorEditC);
+  $(doorsPos).css("margin-bottom","5px")
+  $(doorsPos).css("color","white");
+
+  $( doorsPos ).mouseout(function() {
+    $(this).css("color","white");
+  });
+
+  $( doorsPos ).mouseenter(function() {
+   $(this).css("color","rgba(45,85,255,0.77)");
+  });
+
+  $(doorsPos).click(function(){
+    $(doorsPos).addClass('fa-spin-pulse');
+    setTimeout(function(){
+      $(doorsPos).removeClass('fa-spin-pulse');
+      // $('.container').hide();
+      $('.sideboard').css("visibility","hidden")
+
+      $.post(`http://dirk-robberycreator/GetDoorGroup`, JSON.stringify({}), function(data) {
+        // console.log(JSON.stringify(curRobs[rn].Doors))
+        // console.log('NAME OF DOOR TO INDEx', n)
+        curRobs[rn].Doors[n].doorObjects = data.selDoors;
+        curRobs[rn].Doors[n].ctrlPoint = data.ctrlPoint;
+
+         $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+              robName: rn,
+              Contents: curRobs[rn]
+          }))
+        setTimeout(function(){
+          $('.sideboard').css("visibility","visible")
+          $(doorsPos).css("color","green")
+          setTimeout(function(){
+            $(this).css("color","white");
+          },1500)
+          
+        },500)      
+      });
+    },500)
+  })  
+
+
+
+  let DoorGame = $(`<label style="font-size:75%;"for="shells">Door Minigame</label>`).appendTo(doorEditC);
+  let DoorGameSelect= $(`<select name="shells style="text-align:center;" id="shells"></select>`).appendTo(doorEditC);
+
+  Object.entries(DoorMiniGames).forEach(([gName,da]) => {
+    $(`<option>${da}</option>`).appendTo(DoorGameSelect);
+    
+  });
+
+
+
+  $(DoorGameSelect).change(function(){
+  curRobs[rn].Doors[n].Minigame = $(DoorGameSelect).val();
+   $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+      robName: rn,
+      Contents: curRobs[rn]
+  })) 
+  })
+
+  $(DoorGameSelect).val(d.Minigame);
+
+  $(doorEditC).css("display","flex")
+  $(doorEditH).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(doorEditC).css("opacity","1.0")
+  },10)   
+
+
+}
+
+
+
+
+
+
+// FOR EDITING CONFIG.OBJECTS -- PASS THIS OBJ DATA AS ALL CURRENT CONFIG.OPTS SETTINGS
+
+var currentSelect = false;
+var currentObj    = false;
+
+
+
+// Loads all object images into the file and loads all of your settings for each item
+ConfigObjList = function(){
+  $('.itemgrid').empty();
+  $('.itemgrid').css("visibility","visible");
+    
+  let newObj = $(`<div style="background-color:transparent; background-image:url('https://cdn.pixabay.com/photo/2017/03/19/03/51/material-icon-2155448_960_720.png'); background-size: 75% 50%;"></div>`).appendTo('.itemgrid');
+  
+
+  $(newObj).click(function(){
+    let newName = `New Object:${Math.floor(Math.random() * 99999)}`;
+    newObjData[newName] = {
+        Model:"ex_prop_monitor_01_ex",
+        Tiny:false, 
+        // Carry Only
+        Weight:100, 
+        Carry:0.25, 
+        PRot:{x:0.0,y:0.0,z:0.0},
+        PPos:{x:0.0,y:0.0,z:0.0},
+
+        //Search Only
+        Search:false,
+        SearchTime:30,
+        //Grab Only
+        Grab:false,
+        GrabItem:false,
+        GrabMin:0,
+        GrabMax:0,
+    }
+    Success(`You have created a new object with the name: ${newName}`)
+    ConfigObjList();
+    $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+    }))    
+    // Create new object here with standard settings. 
+  })
+
+  Object.entries(newObjData).forEach(([objn, d]) => {
+    
+    let objCard = $(`<div></div>`).appendTo('.itemgrid');
+    let delBut  = $(`<i style="position:absolute; right:2%; top:2%; color:grey;" class="fas fa-minus-circle"></i>`).appendTo(objCard);
+
+    $(delBut).mouseenter(function(){
+      $(delBut).css("color","red")
+    })
+
+    $(delBut).mouseout(function(){
+      $(delBut).css("color","grey")
+    })
+
+    $(delBut).click(function(){
+      delete newObjData[objn]
+      Warning(`${objn} has been deleted from the list of objects it will not be usable in any robbery now`)
+      ConfigObjList();
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+          newData:newObjData,
+      }))    
+      // Post to FiveM Object Deleted from Config
+    })
+
+    $(objCard).css(`background-image`, `url('https://gta-objects.xyz/gallery/objects/${d.Model}.jpg')`);
+    let title = false;
+    $( objCard ).mouseenter(function() {
+      title = $(`<div style="display:flex; flex-direction:row; gap:5px; align-items:center; justify-items:center; justify-content:center;">${objn}</div>`).appendTo(objCard);
+      // $(newitem).text(`${objn}`)
+    });
+    $( objCard ).mouseout(function() {
+      // $(newitem).text("")
+      $(title).remove()
+    });
+
+    $(objCard).click(function(){
+      OpenObjData(objn,d)
+    })
+
+
+  })
+}
+
+OpenObjData = function(on,d){
+  $('.sideboard').css("visibility","visible");
+  $('.sideboard').empty();
+
+  let Buttons = $(`<div class='collapsible'></div>`).appendTo('.sideboard')
+  let butCont  = $(`<div class='cHeader'></div>`).appendTo(Buttons);    
+  let SaveButton = $(`<div class='cButton1'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  // let SaveButton = $(`<div class='cButton2'><i class="fas fa-save"></i></div>`).appendTo(butCont)
+  $(Buttons).css("background-color","rgba(0,0,0,0.88)")
+
+  $(SaveButton).click(function(){
+    $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+    }))    
+    $(SaveButton).css("color","green");
+    setTimeout(function(){
+      $(SaveButton).css("color","grey");
+    }, 2500)
+  })
+
+  let standCollapse = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let standH = $(`<div class='cHeader'><div class='cLabel'>Standard</div></div>`).appendTo(standCollapse);
+  let standC = $(` <div class ='cContent'></div>`).appendTo(standCollapse)
+
+  let objNLabel = $(`<label style="font-size:75%;"for="tiny">Object Name: ${on}</label>`).appendTo(standC);
+  let objName = $(`
+       <input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${on}">`).appendTo(standC);
+  $(objName).keypress(function() {
+    if ( event.which == 13 ) {
+      let newname = $(objName).val();
+      if (!newObjData[newname]){
+        newObjData[newname] = newObjData[on]
+        delete newObjData[on]
+        // Post to FiveM - Rename of Config.Objects
+        //  $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+        //     robName: rn,
+        //     Contents: curRobs[rn]
+        // }))        
+        ConfigObjList();
+        OpenObjData(newname,d)
+      }else{
+        Warning("An object with this name already exists try another name")
+      }
+    }
+  });
+
+
+  let modNLabel = $(`<label style="font-size:75%;"for="tiny">Object Model: ${d.Model}</label>`).appendTo(standC);
+  let modName = $(`
+       <input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${d.Model}">`).appendTo(standC);
+  $(modName).keypress(function() {
+    if ( event.which == 13 ) {
+
+      let newname = $(modName).val();
+      newObjData[on].Model = newname
+      ConfigObjList();
+      OpenObjData(on,d)
+        // Post to FiveM - Rename of Config.Objects
+        //  $.post(`http://dirk-robberycreator/BuildRobbery`, JSON.stringify({
+        //     robName: rn,
+        //     Contents: curRobs[rn]
+        // }))        
+
+
+    }
+  });
+
+
+  $(standC).css("display","flex")
+  $(standH).css("background-color","rgba(0,0,0,0.88)")
+  setTimeout(function(){
+    $(standC).css("opacity","1.0")
+  },10) 
+
+  let tinyLabel = $(`<label style="font-size:75%;"for="tiny">Tiny: ${d.Tiny}</label>`).appendTo(standC);
+  let tinySlide = $(`<input class="slider is-fullwidth is-small is-circle" step=0.05 min=0.0 max=1.0 value=${d.Tiny} type="range">`).appendTo(standC);
+
+
+  $(tinySlide).change(function(){
+    let newValue = $(tinySlide).val();
+    if (newValue <= 0){
+      newValue = false;
+    } 
+    newObjData[on].Tiny = newValue;    
+    $(tinyLabel).text(`Tiny: ${newValue}`)
+  })
+
+
+
+  //CARRY START
+
+  let carryCollapse = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let carryH = $(`<div class='cHeader'><div class='cLabel'>Carry</div></div>`).appendTo(carryCollapse);
+  let carryC = $(` <div class ='cContent'></div>`).appendTo(carryCollapse)
+  let carButton = $(`<input id="carryBtn" type="checkbox" name="carryBtn" class="switch is-rounded is-success is-small"><label for="carryBtn"></label>`).appendTo(carryH);
+
+
+
+  $(carButton).change(function(){
+    $(carryC).empty();
+    
+
+
+    if ($(carButton).prop('checked') == true){
+      if (newObjData[on].Carry == false){
+        newObjData[on].Carry = 0.6;
+        $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+          newData:newObjData,
+        }))  
+      }
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))  
+      $(carryC).css("display","flex")
+      $(carryH).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(carryC).css("opacity","1.0")
+      },10) 
+    }else{
+      newObjData[on].Carry = false;
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))    
+      setTimeout(function(){
+        $(carryC).css("opacity","0")
+      },10)
+      $(carryH).css("background-color","rgba(0,0,0,0.44)")
+      $(carryC).css("display", "none")
+    }
+
+
+    let weightLabel = $(`<label style="font-size:75%;"for="weight">Weight: ${d.Weight}</label>`).appendTo(carryC);
+    let weightSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=1000 value=${d.Weight} type="range">`).appendTo(carryC);
+
+    $(weightSlide).change(function(){
+      let newValue = $(weightSlide).val();
+      newObjData[on].Weight = newValue;    
+      $(weightLabel).text(`Weight: ${newValue}`)
+    })
+
+    let cweightLabel = $(`<label style="font-size:75%;"for="weight">Carry Speed: ${d.Carry}</label>`).appendTo(carryC);
+    let cweightSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=0.05 min=0.0 max=1.0 value=${d.Carry} type="range">`).appendTo(carryC);
+
+    $(cweightSlide).change(function(){
+      let newValue = $(cweightSlide).val();
+      newObjData[on].Carry = newValue;    
+      $(cweightLabel).text(`Weight: ${newValue}`)
+    })
+
+
+    let cPriceMinL = $(`<label style="font-size:75%;"for="min">Min Price: ${d.MinPrice}</label>`).appendTo(carryC);
+    let cPriceMinSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=10 min=0 max=10000 value=${d.MinPrice} type="range">`).appendTo(carryC);
+
+    $(cPriceMinSlide).change(function(){
+      let newValue = $(cPriceMinSlide).val();
+      newObjData[on].MinPrice = newValue;    
+      $(cPriceMinL).text(`Min Price: ${newValue}`)
+    })
+
+
+
+    let cPriceMaxL = $(`<label style="font-size:75%;"for="weight">Max Price: ${d.MaxPrice}</label>`).appendTo(carryC);
+    let cPriceMaxSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=0.05 min=0 max=10000 value=${d.MaxPrice} type="range">`).appendTo(carryC);
+
+    $(cPriceMaxSlide).change(function(){
+      let newValue = $(cPriceMaxSlide).val();
+      newObjData[on].MaxPrice = newValue;    
+      $(cPriceMaxL).text(`Max Price: ${newValue}`)
+    })
+
+
+
+    let pPosv3 = $(`<label style="font-size:75%">Carry Position</label>`).appendTo(carryC);
+    let pPosC = $(`<div style='display:flex; flex-direction:row;'></div>`).appendTo(carryC);
+    let px = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(x)">`).appendTo(pPosC);
+    $(px).val(d.PPos.x);
+    let py = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(y)">`).appendTo(pPosC);
+    $(py).val(d.PPos.y);
+    let pz = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(z)">`).appendTo(pPosC);
+    $(pz).val(d.PPos.z);
+    $(px).change( function() {
+      newObjData[on].PPos.x = $(this).val();
+    });  
+    $(py).change( function() {
+      newObjData[on].PPos.y = $(this).val();
+    });  
+    $(pz).change( function() {
+       newObjData[on].PPos.z = $(this).val();
+    });       
+
+
+    let pRotv3 = $(`<label style="font-size:75%">Carry Rotation</label>`).appendTo(carryC);
+    let pRotC = $(`<div style='display:flex; flex-direction:row;'></div>`).appendTo(carryC);
+    let rx = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(x)">`).appendTo(pRotC);
+    $(rx).val(d.PPos.x);
+    let ry = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(y)">`).appendTo(pRotC);
+    $(ry).val(d.PPos.y);
+    let rz = $(`<input style="text-align: center; width:35%;" class="input is-small" type="number" step="0.01" placeholder="(z)">`).appendTo(pRotC);
+    $(rz).val(d.PPos.z);
+    $(rx).change( function() {
+      newObjData[on].PRot.x = $(this).val();
+    });  
+    $(ry).change( function() {
+      newObjData[on].PRot.y = $(this).val();
+    });  
+    $(rz).change( function() {
+       newObjData[on].PRot.z = $(this).val();
+    });   
+
+  })
+
+  if (d.Carry != false && d.Carry != null){
+   
+    $(carButton).prop('checked', true);
+     $(carButton).trigger("change");
+  }
+
+  //FINSIHED CARRY OPTIONS
+
+  // START SEARCH OPTIONS
+  let searchCollapse = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let searchH = $(`<div style = "border-radius:5px;" class='cHeader'><div class='cLabel'>Search</div></div>`).appendTo(searchCollapse);
+  let searButton = $(`<input id="searBTN" type="checkbox" name="searBTN" class="switch is-rounded is-success is-small"><label for="searBTN"></label>`).appendTo(searchH);
+  let searchC = $(` <div class ='cContent'></div>`).appendTo(searchCollapse)
+
+  $(searButton).prop('checked', d.Search)
+  $(searButton).change(function(){
+    newObjData[on].Search = $(searButton).prop('checked');
+    $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+      newData:newObjData,
+    }))  
+  });
+
+  if (d.SearchTime == null) {
+    newObjData[on].SearchTime = 40;
+    $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+      newData:newObjData,
+    }))  
+  }
+
+  $(searButton).change(function(){
+    $(searchC).empty();
+    
+
+
+    if ($(searButton).prop('checked') == true){
+      if (newObjData[on].Search == false){
+        newObjData[on].Search = true;
+        $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+          newData:newObjData,
+        }))  
+      }
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))  
+      $(searchC).css("display","flex")
+      $(searchH).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(searchC).css("opacity","1.0")
+      },10) 
+    }else{
+      newObjData[on].Search = false;
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))    
+      setTimeout(function(){
+        $(searchC).css("opacity","0")
+      },10)
+      $(searchH).css("background-color","rgba(0,0,0,0.44)")
+      $(searchC).css("display", "none")
+    }
+
+
+    let searchLabel  = $(`<label style="font-size:75%;"for="TimeOut">Search Time: ${d.SearchTime} seconds</label>`).appendTo(searchC);
+    let searchSelect = $(`<input class="slider is-fullwidth is-small is-circle TimeOut" step=0.5 min=0 max=100 value=${d.SearchTime} type="range">`).appendTo(searchC);
+    $(searchSelect).change(function(){
+      newObjData[on].SearchTime = $(searchSelect).val()
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))        
+      $(searchLabel).text(`Search Time: ${$(searchSelect).val()} seconds`)
+    })
+
+
+  });
+
+
+  if (d.Search != false && d.Search != null){
+   
+    $(searButton).prop('checked', true);
+     $(searButton).trigger("change");
+  }
+
+
+  // //
+
+    //Grab Only
+    // Grab:false,
+    // GrabItem:false,
+    // GrabAmt:0,
+
+  let grabCollapse = $(`<div class='collapsible'></div>`).appendTo('.sideboard');
+  let grabH = $(`<div class='cHeader'><div class='cLabel'>Grab</div></div>`).appendTo(grabCollapse);
+  let grabC = $(` <div class ='cContent'></div>`).appendTo(grabCollapse)
+  let grabButton = $(`<input id="grabBTN" type="checkbox" name="grabBTN" class="switch is-rounded is-success is-small"><label for="grabBTN"></label>`).appendTo(grabH);
+
+
+
+  $(grabButton).change(function(){
+    $(grabC).empty();
+
+    if ($(grabButton).prop('checked') == true){
+      newObjData[on].Grab = true;
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))  
+      $(grabC).css("display","flex")
+      $(grabH).css("background-color","rgba(0,0,0,0.88)")
+      setTimeout(function(){
+        $(grabC).css("opacity","1.0")
+      },10) 
+    }else{
+      newObjData[on].Grab = false;
+      $.post(`http://dirk-robberycreator/updateConfigObjs`, JSON.stringify({
+        newData:newObjData,
+      }))  
+      setTimeout(function(){
+        $(grabC).css("opacity","0")
+      },10)
+      $(grabH).css("background-color","rgba(0,0,0,0.44)")
+      $(grabC).css("display", "none")
+    }
+
+
+    let gItemLabel = $(`<label style="font-size:75%;"for="tiny">Reward Item</label>`).appendTo(grabC);
+    let gItemName = $(`<input class="input is-small" style="text-align:center; color:black;" type="text" placeholder="${d.GrabItem}">`).appendTo(grabC);
+    $(gItemName).keypress(function() {
+      if ( event.which == 13 ) {
+        let newname = $(gItemName).val();
+        newObjData[on].GrabItem = newname;
+      }
+    });
+
+    let gMinLabel = $(`<label style="font-size:75%;"for="tiny">Min Amount: ${d.GrabMin}</label>`).appendTo(grabC);
+    let gMinSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=50 value=${d.GrabMin} type="range">`).appendTo(grabC);
+    $(gMinSlide).change(function(){
+      let newValue = $(gMinSlide).val();
+      newObjData[on].GrabMin = newValue;    
+      $(gMinLabel).text(`Min Amount: ${newValue}`)
+    })
+
+    let gMaxLabel = $(`<label style="font-size:75%;"for="gMax">Max Amount: ${d.GrabMax}</label>`).appendTo(grabC);
+    let gMaxSlide = $(`<input class="slider is-fullwidth is-small is-circle" step=1 min=0 max=50 value=${d.GrabMax} type="range">`).appendTo(grabC);
+    $(gMaxSlide).change(function(){
+      let newValue = $(gMaxSlide).val();
+      newObjData[on].GrabMax = newValue;    
+      $(gMaxLabel).text(`Max Amount: ${newValue}`)
+    })
+
+
+  })
+
+
+
+
+
+  if (d.Grab != false){
+    $(grabButton).prop('checked', true);
+    $(grabButton).trigger("change");
+  }  
+}
+
+  Warning = function(msg){
+    let notif = $(`<article style= " margin-top:5%; color:white; background-color:rgba(0,0,0,0.8); margin-left:5%; margin-right:5%; height:auto; width:300px; font-family:'Bebas Neue'; font-size:20px; opacity:0;  transition: all 1s; -webkit-transition: all 1s;" class="message is-danger"></article>`).appendTo('body');
+    $(`<div class="message-body">
+          ${msg}
+        </div>`).appendTo(notif);
+    $( notif ).fadeTo( 400, 1.0 );
+
+      
+    setTimeout(function(){
+      $( notif ).fadeTo( 400, 0.0 );
+      setTimeout(function(){
+        $(notif).remove()
+      },2500)
+    },2500)
+  
+  }
+
+  Notify = function(msg){
+    let notif = $(`<article style= " margin-top:5%; color:white; background-color:rgba(0,0,0,0.8); margin-left:5%; margin-right:5%; height:auto; width:300px; font-family:'Bebas Neue'; font-size:20px; opacity:0;  transition: all 1s; -webkit-transition: all 1s;" class="message is-info"></article>`).appendTo('body');
+    $(`<div class="message-body">
+          ${msg}
+        </div>`).appendTo(notif);
+    $( notif ).fadeTo( 400, 1.0 );
+
+      
+    setTimeout(function(){
+      $( notif ).fadeTo( 400, 0.0 );
+      setTimeout(function(){
+        $(notif).remove()
+      },2500)
+    },2500)
+  }
+
+  Success = function(msg){
+    let notif = $(`<article style= " margin-top:5%; color:white; background-color:rgba(0,0,0,0.8); margin-left:5%; margin-right:5%; height:auto; width:300px; font-family:'Bebas Neue'; font-size:20px; opacity:0;  transition: all 1s; -webkit-transition: all 1s;" class="message is-success"></article>`).appendTo('body');
+    $(`<div class="message-body">
+          ${msg}
+        </div>`).appendTo(notif);
+    $( notif ).fadeTo( 400, 1.0 );
+
+      
+    setTimeout(function(){
+      $( notif ).fadeTo( 400, 0.0 );
+      setTimeout(function(){
+        $(notif).remove()
+      },2500)
+    },2500)
+  
+  }
+
+    
+    window.addEventListener('message',function(event) {
+      if (event.data.type == "robCreate") {
+
+        curRobs     = event.data.curRobs;
+        newObjData  = event.data.curObjects;
+        configAnims = event.data.curAnims; 
+        configWeapons = event.data.curWeps;
+        carClasses    = event.data.carClasses;
+        DoorMiniGames = event.data.DoorMiniGames;
+        ShellSettings = event.data.ShellSettings;
+        ViewRobberies();
+      } else if (event.data.type == "setObjData"){
+ 
+        newObjData = event.data.objData;
+        ConfigObjList()
+      }
+    })
+
+
+
+    $(document).keyup(function(e) {
+      if (e.key === "Escape") { 
+        $('.sideboard').css("visibility", "hidden");
+        $('.itemgrid').css("visibility", "hidden");
+        $.post('http://dirk-robberycreator/quitMenu', JSON.stringify({}));
+      }
+    });
+
+
+
+
+
+
+        // test();
+
+    $(document).mousedown(function(event) {
+        switch (event.which) {
+            case 3:
+                $.post('http://dirk-robberycreator/toggleUI', JSON.stringify({}));
+                break;
+            default:
+        }
+    });
+
+
+
+
+
+</script>
+
+<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+</body>
+</html>
