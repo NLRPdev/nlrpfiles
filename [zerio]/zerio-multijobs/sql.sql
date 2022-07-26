@@ -1,0 +1,1 @@
+ALTER TABLE `players` ADD zeriomultijobs LONGTEXT DEFAULT '[]'

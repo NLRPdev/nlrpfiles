@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="./libs/vue.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+    <script src="./libs/sweetalert2.js"></script>
+    <link href="./libs/sweetalert2.css" rel="stylesheet">
+
+    <link href="./libs/contextmenu.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <script src="https://kit.fontawesome.com/dbb93909f4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <v-app id="app">
+        <div
+            class="main rotating-border"
+            id="main"
+            style="right:-100%;"
+        >
+            <div 
+                id="context-menu"
+                :class="{'active': contextmenuopen}"
+            >
+                <div 
+                    class="item"
+                    @click="deletejob()"
+                >
+                    <i class="fa fa-trash-o"></i>
+                    <h1>Remove Job</h1>
+                </div>
+            </div>
+            <div class="main-cont">
+                <h1
+                    class="top-header"
+                >
+                    Your Jobs
+                </h1>
+                <div
+                    class="job-container default"
+                    style="min-height:50px!important"
+                >
+                    <i 
+                        class="fa-solid fa-mug-hot job-icon"
+                    >
+                    </i>
+                    <h2
+                        class="job-label"
+                        :style="{ flex: playerjob == defaultjob ? '0 0 calc(100% - 170px)' : '0 0 calc(100% - 140px)', 'margin-right': playerjob == defaultjob ? '10px' : '0px'}"
+                    >
+                        Unemployed
+                    </h2>
+                    <v-btn
+                        color="primary"
+                        elevation="10"
+                        style="color:white!important;"
+                        @click="updateJob(defaultjob, 'Unemployed')"
+                    >
+                        {{playerjob == defaultjob ? "Selected" : "Select"}}
+                    </v-btn>
+                </div>
+                <div
+                    class="job-list"
+                >
+                    <div
+                        class="job-container"
+                        v-for="(job, i) in playerjobs"
+                        :key="job.name"
+                        :style="{'margin-top': i == 0 ? '0px' : '10px'}"
+                        @contextmenu='opencontextmenu'
+                        :id="job.name"
+                    >
+                        <i 
+                            :class="job.icon + ' job-icon'"
+                        >
+                        </i>
+                        <h2
+                            class="job-label"
+                            :style="{ flex: playerjob == job.name ? '0 0 calc(100% - 170px)' : '0 0 calc(100% - 140px)', 'margin-right': playerjob == job.name ? '10px' : '0px'}"
+                        >
+                            {{job.label}}
+                        </h2>
+                        <v-btn
+                            color="primary"
+                            elevation="10"
+                            style="color:white!important;"
+                            @click="updateJob(job.name, job.label)"
+                        >
+                            {{playerjob == job.name ? "Selected" : "Select"}}
+                        </v-btn>
+                        <h3
+                            class="job-description"
+                            style="flex: 0 0 100%"
+                        >
+                            {{job.gradelabel}} | ${{nf.format(job.payment)}}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </v-app>
+
+    <script>
+        const viewmodel = new Vue({
+            el: '#app',
+            vuetify: new Vuetify({
+                theme: {
+                    themes: {
+                        light: {
+                            primary: "#494e8a"
+                        }
+                    }
+                }
+            }),
+
+            data: {
+                playerjob: "premium",
+                playerjobs: [],
+                defaultjob: "unemployed",
+
+                nf: Intl.NumberFormat(),
+
+                contextmenuopen: false,
+
+                waitingforresponse: false
+            },
+            props: {
+
+            },
+            methods: {
+                changedisplay(newvalue, data) {
+                    var main = document.getElementById('main')
+                    if (newvalue == false) {
+                        fetch("https://zerio-multijobs/close", {
+                            headers: {
+                                accept: 'application/json',
+                            },
+                        }).catch((result) => {})
+                        main.style.right = "-100%"
+                    }
+                    else {
+                        viewmodel.playerjob = data.job
+                        viewmodel.playerjobs = data.jobs
+                        main.style.right = "50px"
+                    }
+                },
+                updateJob(name,label) {
+                    if (viewmodel.playerjob !== name) {
+                        fetch("https://zerio-multijobs/updatejob", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                jobname: name
+                            }),
+                            headers: {
+                                accept: 'application/json',
+                            },
+                        }).catch((result) => {})
+                        viewmodel.playerjob = name
+                        Notifications.fire({
+                            title: "Job change",
+                            text: `You changed your job to ${label}.`,
+                            icon: 'success',
+                            target: ".main"
+                        })
+                    }
+                    else {
+                        Notifications.fire({
+                            title: "Job change",
+                            text: `You are already this job!`,
+                            icon: 'info',
+                            target: ".main"
+                        })
+                    }
+                },
+                opencontextmenu(event) {
+                    event.preventDefault();
+                    var contextElement = document.getElementById("context-menu");
+                    var contextParent = event.target.closest(".job-container")
+                    contextParent.appendChild(contextElement)
+                    contextElement.style["margin-top"] = event.offsetY + "px";
+                    contextElement.style["margin-left"] = event.offsetX + "px";
+                    viewmodel.contextmenuopen = true
+                    viewmodel.contextopenedidx = contextParent.id
+                },
+                deletejob() {
+                    Notifications.fire({
+                        title: 'Are you sure?',
+                        text: `Are you sure that you want to leave / remove this job?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Leave',
+                        target: ".main"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch("https://zerio-multijobs/removejob", {
+                                method: "POST",
+                                body: JSON.stringify({
+                                    jobname: viewmodel.contextopenedidx
+                                }),
+                                headers: {
+                                    accept: 'application/json',
+                                },
+                            }).catch((result) => {})
+                            Notifications.fire({
+                                title: "Remove job",
+                                text: `You left the job.`,
+                                icon: 'success',
+                                target: ".main"
+                            })
+
+                            var contextElement = document.getElementById("context-menu");
+                            var removeElement = document.getElementById(viewmodel.contextopenedidx)
+                            var contextParent = document.getElementById("main")
+
+                            viewmodel.waitingforresponse = true
+
+                            contextParent.appendChild(contextElement)
+                            viewmodel.contextmenuopen = false
+                            removeElement.remove()
+                        }
+                    })
+                }
+            },
+            computed: {
+
+            },
+
+            created() {
+
+            }
+        });
+
+        window.addEventListener('message', function(event) {
+            switch(event.data.action) {
+                case "open":
+                    viewmodel.changedisplay(true, event.data.data)
+                    break;
+                case "close":
+                    viewmodel.changedisplay(false)
+                    break;
+                case "removejobresponse":
+                    if (viewmodel.waitingforresponse == true) {
+                        if (event.data.data.status == true) {
+                            viewmodel.playerjob = viewmodel.defaultjob
+                        }
+                    }
+                    break;
+            }
+        })
+
+        window.addEventListener('keydown', function(event) {
+            switch(event.keyCode) {
+                case 27:
+                    viewmodel.changedisplay(false)
+                    break;
+            }
+        })
+
+        window.addEventListener("click",function(){
+            viewmodel.contextmenuopen = false
+        });
+    </script>
+</body>
+</html>
