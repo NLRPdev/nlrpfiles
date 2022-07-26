@@ -648,7 +648,7 @@ QBShared.Items = {
 	["cherry"]            		 = {["name"] = "cherry",             		["label"] = "Cherry",     				["weight"] = 20,        ["type"] = "item",      ["image"] = "cherry.png",        		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Cherry!"},
 	["lime"]            		 = {["name"] = "lime",             			["label"] = "Lime",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "lime.png",        		    ["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Lime!"},
 	["lemon"]            		 = {["name"] = "lemon",             		["label"] = "Lemon",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "lemon.png",        		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Lemon!"},	
-	["apple"]            		 = {["name"] = "apple",             		["label"] = "Apple",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "Apple.png",          		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Apple!"},	
+	["apple"]            		 = {["name"] = "apple",             		["label"] = "Apple",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "apple.png",        		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Apple!"},	
 	["orange"]            		 = {["name"] = "orange",             		["label"] = "Orange",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "orange.png",        		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Orange!"},	
 	["tomato"]            		 = {["name"] = "tomato",             		["label"] = "Tomato",     				["weight"] = 40,        ["type"] = "item",      ["image"] = "tomato.png",        		["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Tomato!"},	
 	["pineapple"]                = {["name"] = "pineapple",             	["label"] = "Pineapple",     			["weight"] = 60,        ["type"] = "item",      ["image"] = "pineapple.png",        	["unique"] = false,     ["useable"] = false,    ["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "pineapple!"},
@@ -666,5 +666,10 @@ QBShared.Items = {
 	["bloodymary"]             	 = {["name"] = "bloodymary",             	["label"] = "bloodymary",     	        ["weight"] = 400,       ["type"] = "item",      ["image"] = "bloodymary.png",           ["unique"] = false,     ["useable"] = true,    ["shouldClose"] = true,     ["combinable"] = nil,   ["description"] = "Bloody Mary!"},
 		----moneywash
 	['wetbills'] 					 = {['name'] = 'wetbills', 			  	  		['label'] = 'Wet Bills', 				['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'wetbills.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Money?'},
+
+	--------crafting items
+	['weaponpart'] 					 = {['name'] = 'weaponpart', 			  	  		['label'] = 'Weapon Part', 				['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'weaponpart.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'piece of a weapon!'},
+	['techtrash'] 					 = {['name'] = 'techtrash', 			  	  		['label'] = 'Tech Trash', 				['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'techtrash.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Old piece of tech!'},
+
 }
 
