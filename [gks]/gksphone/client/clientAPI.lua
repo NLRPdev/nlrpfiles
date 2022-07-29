@@ -8,12 +8,223 @@ function  OpenPhoneBlock () -- You can use this function if you want to prevent 
 end
 
 
+
+
 -- ## JOB APP ## --
 
 RegisterNUICallback('JobMMessages', function(data, cb)
   local myPos = GetEntityCoords(PlayerPedId())
   local GPS = 'GPS: ' .. myPos.x .. ', ' .. myPos.y
   TriggerServerEvent('gksphone:gkcs:jbmessage', data.name, data.number, data.message, data.photo, GPS, data.jobm, data.anon)
+end)
+
+--- QBCORE MDT ---
+
+RegisterNUICallback('userfetchmdt', function(data)
+  Config.Core.Functions.TriggerCallback('gksphone:server:FetchResult', function(result)
+    SendNUIMessage({event = 'MDTFetchPerson', MdtPerson = result})
+  end, data)
+end)
+
+RegisterNUICallback('housefetchmdt', function(data)
+  Config.Core.Functions.TriggerCallback('qb-phone:server:MeosGetPlayerHouses', function(result)
+    SendNUIMessage({event = 'MDTFetchHouse', MdtHouse = result})
+  end, data)
+end)
+
+RegisterNUICallback('platescanmdt', function(data)
+  local vehicle = Config.Core.Functions.GetClosestVehicle()
+  local plate = Config.Core.Functions.GetPlate(vehicle)
+  local vehname = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)):lower()
+  local denadwad = {}
+  Config.Core.Functions.TriggerCallback('gksphone:server:ScanPlate', function(result)
+    Config.Core.Functions.TriggerCallback('police:IsPlateFlagged', function(flagged)
+          result.isFlagged = flagged
+          if Config.Core.Shared.Vehicles[vehname] ~= nil then
+              result.label = Config.Core.Shared.Vehicles[vehname]['name']
+          else
+              result.label = 'Unknown brand..'
+          end
+          table.insert(denadwad, result)
+          SendNUIMessage({event = 'MDTFetchPlate', MdtPlate = denadwad})
+      end, plate)
+  end, plate)
+
+end)
+
+RegisterNUICallback('platesearchmdt', function(data)
+  Config.Core.Functions.TriggerCallback('gksphone:server:GetVehicleSearchResults', function(result)
+    if result ~= nil then
+        for k, v in pairs(result) do
+          Config.Core.Functions.TriggerCallback('police:IsPlateFlagged', function(flagged)
+                result[k].isFlagged = flagged
+            end, result[k].plate)
+            Wait(50)
+        end
+    end
+    SendNUIMessage({event = 'MDTFetchPlate', MdtPlate = result})
+  end, data)
+end)
+
+RegisterNUICallback('wantedekleme', function(data)
+  TriggerServerEvent('gksphone:server:wantedekle', data.cid, data.wreason, data.wappear, data.wlastsn)
+end)
+
+RegisterNUICallback('wantedelete', function(data)
+  TriggerServerEvent('gksphone:server:wantedelete', data)
+end)
+
+RegisterNUICallback('wantedveri', function(data)
+  Config.Core.Functions.TriggerCallback('gksphone:server:wantedveri', function(result)
+    SendNUIMessage({event = 'MDTWantedFetch', MdtWanted = result})
+  end)
+end)
+
+RegisterNetEvent('gksphone:client:wantedyenile', function(result)
+  SendNUIMessage({event = 'MDTWantedFetch', MdtWanted = result})
+end)
+
+RegisterNUICallback('setApartLocal', function(data, cb)
+  local TypeData = Apartments.Locations[data.type]
+  SetNewWaypoint(TypeData.coords.enter.x, TypeData.coords.enter.y)
+  TriggerEvent('gksphone:notifi', {title = _U('gps_title'), message = _U('set_gps'), img= '/html/static/img/icons/maps.png' })
+end)
+
+
+
+--- QBCORE House ---
+
+RegisterNUICallback('qbcorehfetch', function(data)
+  if Config.loafHouse then
+    local ownedHouses = exports.loaf_housing:GetOwnedHouses()
+    SendNUIMessage({event = 'FetchPlayerHouse', PlayerHouse = ownedHouses})
+  else
+    Config.Core.Functions.TriggerCallback('qb-phone:server:GetPlayerHouses', function(result)
+      SendNUIMessage({event = 'FetchPlayerHouse', PlayerHouse = result})
+    end)
+  end
+
+end)
+
+RegisterNUICallback('qbcorehkeyfetch', function(data)
+  if Config.loafHouse then
+    local keys = exports.loaf_keysystem:GetKeys()
+    local properties = {}
+    for _, v in pairs(keys) do
+        local _, _, propertyId = v.key_id:find("housing_key_(.*)_")
+        if propertyId then
+            properties[tonumber(propertyId)] = {HouseData = {adress = v.key_data.name}, id = tonumber(propertyId)}
+        end
+    end
+    SendNUIMessage({event = 'FetchPlayerHouseKeys', PlayerHouseKeys = properties})
+  else
+    Config.Core.Functions.TriggerCallback('qb-phone:server:GetHouseKeys', function(result)
+      SendNUIMessage({event = 'FetchPlayerHouseKeys', PlayerHouseKeys = result})
+    end)
+  end
+
+end)
+
+RegisterNUICallback('qbhousetransfer', function(data)
+  if Config.loafHouse then
+    TriggerServerEvent('gksphone:server:evtransfer', data)
+  else
+    Config.Core.Functions.TriggerCallback('gksphone:server:getCizitinID', function(citizenid)
+      local TransferedCid = citizenid
+      CreateThread(function()
+        Config.Core.Functions.TriggerCallback('qb-phone:server:TransferCid', function(transfer)
+          if transfer then
+            Config.Core.Functions.TriggerCallback('qb-phone:server:GetPlayerHouses', function(result)
+              SendNUIMessage({event = 'FetchPlayerHouse', PlayerHouse = result})
+            end)
+          end
+        end, TransferedCid, data.bilgi)
+      end)
+    end, data)
+  end
+end)
+
+RegisterNUICallback('qbcoreHouseLocal', function(data)
+  if Config.loafHouse then
+    exports.loaf_housing:MarkProperty(data.id)
+    TriggerEvent('gksphone:notifi', {title = _U('gps_title'), message = _U('set_gps'), img= '/html/static/img/icons/maps.png' })
+  else
+    SetNewWaypoint(data.HouseData.coords.enter.x, data.HouseData.coords.enter.y)
+    TriggerEvent('gksphone:notifi', {title = _U('gps_title'), message = _U('set_gps'), img= '/html/static/img/icons/maps.png' })
+  end
+end)
+
+RegisterNetEvent('gksphone:client:transferev', function(plyaerid, proptyid)
+  exports.loaf_housing:TransferProperty(proptyid, plyaerid)
+  TriggerEvent('gksphone:notifi', {title = _U('house_title'), message = _U('house_transfer'), img= '/html/static/img/icons/home.png' })
+end)
+
+--- QBCORE Crypto ---
+
+RegisterNUICallback('qbCryptoTrans', function()
+  Config.Core.Functions.TriggerCallback('gksphone:server:GetCryptoTrans', function(result)
+    SendNUIMessage({event = 'FetchCryotoTrans', myTrans = result})
+  end)
+end)
+
+RegisterNUICallback('qbCrptoValue', function()
+  local dnadawd = {}
+  Config.Core.Functions.TriggerCallback('qb-crypto:server:GetCryptoData', function(CryptoData)
+    table.insert(dnadawd, CryptoData)
+    SendNUIMessage({event = 'FetchCryptoData', CryptoData = dnadawd})
+  end, Config.CryptoName)
+end)
+
+RegisterNUICallback('qbcrytobuy', function(data)
+  local dnadawd = {}
+  local sayikontrol = tostring(data.Coins)
+	if #sayikontrol >= 15 then
+		TriggerEvent('gksphone:notifi', { title = _U('bourse_title'), message = _U('cyrpto_amountwrng'), img = '/html/static/img/icons/stocks.png' })
+		return
+	end
+  Config.Core.Functions.TriggerCallback('qb-crypto:server:BuyCrypto', function(CryptoData)
+    if CryptoData ~= false then
+      table.insert(dnadawd, CryptoData)
+      SendNUIMessage({event = 'FetchCryptoData', CryptoData = dnadawd})
+    end
+  end, data)
+end)
+
+RegisterNUICallback('qbcrytosell', function(data, cb)
+  local dnadawd = {}
+  local sayikontrol = tostring(data.Coins)
+	if #sayikontrol >= 15 then
+		TriggerEvent('gksphone:notifi', { title = _U('bourse_title'), message = _U('cyrpto_amountwrng'), img = '/html/static/img/icons/stocks.png' })
+		return
+	end
+  Config.Core.Functions.TriggerCallback('qb-crypto:server:SellCrypto', function(CryptoData)
+    table.insert(dnadawd, CryptoData)
+    SendNUIMessage({event = 'FetchCryptoData', CryptoData = dnadawd})
+  end, data)
+end)
+
+RegisterNUICallback('qbcrytotrnsfer', function(data, cb)
+  local dnadawd = {}
+  Config.Core.Functions.TriggerCallback('gksphone:server:getWalletID', function(WalletID)
+    if WalletID then
+      data.WalletId = WalletID
+      CreateThread(function()
+        Config.Core.Functions.TriggerCallback('qb-crypto:server:TransferCrypto', function(CryptoData)
+          table.insert(dnadawd, CryptoData)
+          SendNUIMessage({event = 'FetchCryptoData', CryptoData = dnadawd})
+        end, data)
+      end)
+    end
+  end, data)
+end)
+
+RegisterNetEvent('qb-phone:client:AddTransaction', function(SenderData, TransactionData, Message, Title)
+  local Data = {
+      TransactionTitle = Title,
+      TransactionMessage = Message,
+  }
+
+  TriggerServerEvent('qb-phone:server:AddTransaction', Data)
 end)
 
 
@@ -31,19 +242,19 @@ CreateThread(function()                         -- Weather
         letSleed = false
         local denmee
         local agasdwa
-          
+
           if (faruk == -1750463879) then
-            denmee = 'ExtraSunny' 
+            denmee = 'ExtraSunny'
           elseif (faruk == 916995460) then
-            denmee = 'Clear' 
+            denmee = 'Clear'
           elseif (faruk == -1530260698) then
-            denmee = 'Neutral' 
+            denmee = 'Neutral'
           elseif (faruk == 282916021) then
-            denmee = 'Smog' 
+            denmee = 'Smog'
           elseif (faruk == -1368164796) then
-            denmee = 'Foggy' 
+            denmee = 'Foggy'
           elseif (faruk == 821931868) then
-            denmee = 'Clouds' 
+            denmee = 'Clouds'
           elseif (faruk == -1148613331) then
             denmee = 'Overcast'
           elseif (faruk == 1840358669) then
@@ -65,17 +276,17 @@ CreateThread(function()                         -- Weather
           end
 
           if (deea == -1750463879) then
-            agasdwa = 'ExtraSunny' 
+            agasdwa = 'ExtraSunny'
           elseif (deea == 916995460) then
-            agasdwa = 'Clear' 
+            agasdwa = 'Clear'
           elseif (deea == -1530260698) then
-            agasdwa = 'Neutral' 
+            agasdwa = 'Neutral'
           elseif (deea == 282916021) then
-            agasdwa = 'Smog' 
+            agasdwa = 'Smog'
           elseif (deea == -1368164796) then
-            agasdwa = 'Foggy' 
+            agasdwa = 'Foggy'
           elseif (deea == 821931868) then
-            agasdwa = 'Clouds' 
+            agasdwa = 'Clouds'
           elseif (deea == -1148613331) then
             agasdwa = 'Overcast'
           elseif (deea == 1840358669) then
@@ -97,9 +308,9 @@ CreateThread(function()                         -- Weather
           end
 
           TriggerServerEvent('gksphone:weathercontrol', denmee, agasdwa)
-  
+
       else
-        letSleepd = true	
+        letSleepd = true
       end
       if letSleepd then Citizen.Wait(9000) end
   end
@@ -220,4 +431,3 @@ RegisterCommand("911e",function(source, args, rawCommand)
 end, false)
 
 -- REGISTER COMMAND --
-

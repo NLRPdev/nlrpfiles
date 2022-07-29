@@ -2,6 +2,7 @@ class SoundPlayer
 {
     static yPlayer = null;
     youtubeIsReady = false;
+
 	constructor()
 	{
 		this.url = "test";
@@ -17,7 +18,29 @@ class SoundPlayer
 		this.load = false;
 		this.isMuted_ = false;
 		this.audioPlayer = null;
+
+		//this.textToSpeech = false;
+        //this.speechSynthMessage = new SpeechSynthesisUtterance();
+		//this.textToRead = "hello you know";
+		//this.textToReadLang = "en-US";
 	}
+
+    /*
+    setTextToSpeechLang(lang){
+        this.textToReadLang = lang;
+    }
+
+    setTextToSpeech(text){
+        this.textToRead = text;
+    }
+
+    IsTextToSpeech(result){
+        if(typeof result !== "undefined"){
+            this.textToSpeech = result
+        }
+        return this.textToSpeech
+    }
+    */
 
 	isYoutubeReady(result){
 	    this.youtubeIsReady = result;
@@ -42,7 +65,11 @@ class SoundPlayer
 	setDistance(result)  { this.distance = result;   }
 	setDynamic(result)   { this.dynamic = result;    }
 	setLocation(x_,y_,z_){ this.pos = [x_,y_,z_];    }
-	setSoundUrl(result)  { this.url = result;        }
+
+
+	setSoundUrl(result) {
+	    this.url = result.replace(/<[^>]*>?/gm, '');
+	}
 
 	setLoop(result) {
         if(!this.isYoutube)
@@ -61,25 +88,41 @@ class SoundPlayer
 		this.volume = result;
 		if(this.max_volume == -1) this.max_volume = result; 
 		if(this.max_volume > (this.volume - 0.01)) this.volume = this.max_volume;
-		if(this.isMuted_){
+
+        /*
+		if(this.IsTextToSpeech()){
+            this.speechSynthMessage.volume = result;
+		    return;
+		}
+		*/
+
+		if(this.isMuted_ || isMutedAll){
 			if(!this.isYoutube)
 			{
-				if(this.audioPlayer != null) this.audioPlayer.volume(0);
+				if(this.audioPlayer != null) {
+				    this.audioPlayer.volume(0);
+				}
 			}
 			else
 			{
-				if(this.yPlayer && this.youtubeIsReady){this.yPlayer.setVolume(0);}
+				if(this.yPlayer && this.youtubeIsReady){
+				    this.yPlayer.setVolume(0);
+				}
 			}			
 		}
 		else
 		{
 			if(!this.isYoutube)
 			{
-				if(this.audioPlayer != null) this.audioPlayer.volume(result);
+				if(this.audioPlayer != null){
+				    this.audioPlayer.volume(result);
+				}
 			}
 			else
 			{
-				if(this.yPlayer && this.youtubeIsReady){this.yPlayer.setVolume(result * 100);}
+				if(this.yPlayer && this.youtubeIsReady){
+				    this.yPlayer.setVolume(result * 100);
+				}
 			}
 		}
 	}
@@ -95,7 +138,7 @@ class SoundPlayer
         if(link === "")
         {
             this.isYoutube = false;
- 
+
             this.audioPlayer = new Howl({
                 src: [this.getUrlSound()],
                 loop: false,
@@ -135,6 +178,8 @@ class SoundPlayer
                         isReady(event.target.getIframe().id);
                     },
                     'onStateChange': function(event){
+                        event.target.unMute();
+                        event.target.setVolume(0);
                         if (event.data == YT.PlayerState.ENDED) {
                             isLooped(event.target.getIframe().id);
                             ended(event.target.getIframe().id);
@@ -194,6 +239,15 @@ class SoundPlayer
 
 	play() 
 	{
+	    /*
+        if(this.IsTextToSpeech()){
+            this.speechSynthMessage.lang = this.textToReadLang;
+            this.speechSynthMessage.text = this.textToRead;
+            window.speechSynthesis.speak(this.speechSynthMessage);
+            return;
+        }
+        */
+
         if(!this.isYoutube)
         {
             if(this.audioPlayer != null){
@@ -238,28 +292,14 @@ class SoundPlayer
 
 	mute()
 	{
-        if(!this.isYoutube)
-        {
-            if(this.audioPlayer != null) this.audioPlayer.volume(0);
-        }
-        else
-        {
-            if(this.youtubeIsReady) this.yPlayer.setVolume(0);
-        }
         this.isMuted_ = true;
+        this.setVolume(0)
 	}
 
 	unmute()
 	{
-        if(!this.isYoutube)
-        {
-            if(this.audioPlayer != null) this.audioPlayer.volume(this.getVolume());
-        }
-        else
-        {
-            if(this.youtubeIsReady) this.yPlayer.setVolume( this.getVolume() * 100);
-        }
         this.isMuted_ = false;
+        this.setVolume(this.getVolume())
 	}
 
 	unmuteSilent()

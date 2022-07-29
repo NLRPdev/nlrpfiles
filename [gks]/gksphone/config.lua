@@ -18,7 +18,7 @@ end
 --- ### Phone settings ### ---
 
 Config.KeyMapping       = true                 --## This setting is for those using slotted inventory. (Prevents key operation)
-Config.OpenPhone        = 'M'   --## Phone open key ## https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
+Config.OpenPhone        = 'f1'   --## Phone open key ## https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
 Config.Locale           = 'en'
 Config.RegisterCommand  = "fixphone"        -- commandName
 Config.ItemName         = {           -- # item name
@@ -31,9 +31,9 @@ Config.PropActive       = true
 Config.CryptoName       = "qbit"
 Config.HospitalAmbulanceAlert = true
 Config.Fahrenheit       = true
-Config.EyeTarget        = true               -- required qb-target (You can use it for contacts sharing and phone booth)
-Config.UsableItem       = true                -- If you want to use without items set it to false
-Config.AirDropID        = true
+Config.EyeTarget        = false                 -- required qb-target (You can use it for contacts sharing and phone booth)
+Config.UsableItem       = true                  -- If you want to use without items set it to false
+Config.AirDropID        = true                -- Activate the AirDrop feature if you want the player to see the ID.
 Config.AutoMessageDelete    = true             -- Automatically deletes messages (Messages,Mail,Group Messages,Tinder Messages,Yellow Pages)
 Config.AutoDeleteTime       = 7                -- How many days ago you want to delete data
 Config.AutoWantedTime       = 7                -- How many days ago you want to delete data (Automatic deletion of wanted people in MDT application after how many days if deletion is forgotten)
@@ -46,18 +46,20 @@ Config.PMAVoiceExport   = "pma-voice"         -- exports["pma-voice"]   -- Resou
 Config.UseMumbleVoIP    = false  -- Use Frazzle's Mumble-VoIP Resource (Recomended!) https://github.com/FrazzIe/mumble-voip
 Config.PMAVoice         = true
 Config.UseTokoVoIP      = false
-Config.SaltyChat        = false  -- V2.6
+Config.SaltyChat        = false  -- SaltyChat (Only v2.6 and lower | Not tested in v2.6 higher versions)
 
 -- ### BILLING APP ### ---
 Config.qbmanagement       = true
 
+-- ### Business APP ### ---
+Config.JobGrade           = 1   -- Business level (Invoice cancellation authorization)
 
 -- ### TAXI APP ### ---
 Config.TaxiPrice        = 75     -- Taxi Price ( 75$/KM )
 Config.TaxiJobCode      = "taxi"  -- Job Code
 
 -- ### House APP ### ---
-Config.loafHouse          = false   -- Activate if you are using Loaf House (https://store.loaf-scripts.com/package/4310850)
+Config.loafHouse        = true   -- Activate if you are using Loaf House (https://store.loaf-scripts.com/package/4310850)
 
 -- ### BANK APP ### ---
 Config.BankTransferCom  = 10     -- Bank transfer commission rate
@@ -68,9 +70,9 @@ Config.cdGarages        = false  -- Activate if you are using Codesign Garage (h
 Config.loafGarages      = false  -- Activate if you are using Loaf Garage (https://store.loaf-scripts.com/package/4310876)
 
 Config.OwnedVehicles    = "player_vehicles"   -- ## SQL TABLE NAME (VEHICLES)
-Config.ValespawnRadius  = 1000
+Config.ValespawnRadius  = 1000.0   -- Distance to spaw your car
 Config.ValePrice        = 100    -- Vale Price
-Config.ValeNPC          = true
+Config.ValeNPC          = true   -- Activate if you want the valet to bring the car to you.
 
 Config.ClassList = {
     [0] = "Compact",
@@ -97,26 +99,29 @@ Config.ClassList = {
     [21] = "Train"
 }
 
--- ### CAR SELLER APP ### ---
 
 Config.Carhashdebug = false  -- car hash (f8)
+
+-- ### CAR SELLER ### ---
+
 Config.CarsSellerBlacklist = {
     [-1216765807] = true,
     [-12162765807] = true
 }
 
--- ### BILLING APP ### --- (/billing id amount) (edit serverAPI.lua for extra jobs)
+-- ### BILLING APP ### --- (/billing id amount label)
+Config.okokBilling        = false  -- Activate if you are using okokBilling (https://okok.tebex.io/package/4724911)
 Config.BillingCommissions = { -- This is a percentage (0.10) == 10% ( Must be active to receive commission - If the player is not in the game, she/he cannot receive a commission.)
     mechanic = 0.10
 }
-Config.BillginJoB = {
+Config.BillingJob = {
     mechanic = true,
     ambulance = true,
     police = true
 }
 
 -- ### YellowPages APP ### ---
-Config.YellowpagesPrice = 100
+Config.YellowpagesPrice = 300
 
 -- ### Twitter APP ### ---
 Config.TwitterVerifyCommand = "twitterverify"

@@ -63,6 +63,25 @@ function itemphonecheck(source)
 
 end
 
+-- QB PHONE MAIL --
+
+RegisterNetEvent('qb-phone:server:sendNewMail', function(mailData)
+	if mailData.button[1] == nil then
+		mailData.button = nil
+	end
+	mailData.image = "/html/static/img/icons/mail.png"
+	TriggerEvent('gksphone:NewMailqb', source, mailData)
+end)
+
+RegisterNetEvent('qb-phone:server:sendNewMailToOffline', function(cid, mailData)
+	if mailData.button[1] == nil then
+		mailData.button = nil
+	end
+	mailData.image = "/html/static/img/icons/mail.png"
+	TriggerEvent('gksphone:NewMailToOffline', cid, mailData)
+end)
+
+
 -- weather --
 
 function getRandomInt(mini, maxx)
@@ -120,7 +139,17 @@ AddEventHandler("gksphone:weathercontrol", function(birincihava, ikincihava)
 end)
 
 
--- weather --
+--- MUSIC ---
+
+RegisterNetEvent('gksphone:server:musicAll', function(type, musicid, volume)
+  if type == "volume" then
+    TriggerClientEvent("gksphone:server:music", -1, type, source, nil, nil, volume)
+  else
+    TriggerClientEvent("gksphone:server:music", -1, type, source, musicid, GetEntityCoords(GetPlayerPed(source)))
+  end
+end)
+
+
 
 -- REGISTER COMMAND --
 
@@ -328,6 +357,11 @@ AddEventHandler('gksphone:insto_newinstas', function(inap)
   local headers = {
     ['Content-Type'] = 'application/json'
   }
+
+  if inap.authorIcon == "/html/static/img/icons/valeuser.png" then
+    inap.authorIcon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/800px-Instagram-Icon.png"
+  end
+
   local data = {
     ["username"] = inap.username,
     ["avatar_url"] = inap.authorIcon,
@@ -335,9 +369,6 @@ AddEventHandler('gksphone:insto_newinstas', function(inap)
       ["color"] = 1942002
     } }
   }
-  local isHttp = string.sub(inap.message, 0, 7) == 'http://' or string.sub(inap.message, 0, 8) == 'https://'
-  local ext = string.sub(inap.message, -4)
-  local isImg = ext == '.png' or ext == '.jpg' or ext == '.gif' or string.sub(inap.message, -5) == '.jpeg'
 
   data['embeds'][1]['title'] = inap.forename .. " The user posted a new post!"
   data['embeds'][1]['image'] = { ['url'] = inap.image }
@@ -356,6 +387,11 @@ AddEventHandler('gksphone:twitter_newTweets', function(tweet)
   local headers = {
     ['Content-Type'] = 'application/json'
   }
+
+  if tweet.authorIcon == "/html/static/img/twitter/default_profile.png" then
+    tweet.authorIcon = "https://pbs.twimg.com/profile_images/1488548719062654976/u6qfBBkF_400x400.jpg"
+  end
+
   local data = {
     ["username"] = tweet.author,
     ["avatar_url"] = tweet.authorIcon,
@@ -363,10 +399,8 @@ AddEventHandler('gksphone:twitter_newTweets', function(tweet)
       ["color"] = 1942002
     } }
   }
-  local isHttp = string.sub(tweet.message, 0, 7) == 'http://' or string.sub(tweet.message, 0, 8) == 'https://'
-  local ext = string.sub(tweet.message, -4)
-  local isImg = ext == '.png' or ext == '.jpg' or ext == '.gif' or string.sub(tweet.message, -5) == '.jpeg'
-
+  print('^dawdadwd')
+  print(tweet.author)
   data['embeds'][1]['title'] = tweet.author .. " The user posted a new post!"
   data['embeds'][1]['image'] = { ['url'] = tweet.image }
   data['embeds'][1]['description'] = tweet.message
@@ -390,9 +424,6 @@ AddEventHandler('gksphone:yellow_newPagess', function(pages)
       ["color"] = 1942002
     } }
   }
-  local isHttp = string.sub(pages.message, 0, 7) == 'http://' or string.sub(pages.message, 0, 8) == 'https://'
-  local ext = string.sub(pages.message, -4)
-  local isImg = ext == '.png' or ext == '.jpg' or ext == '.gif' or string.sub(pages.message, -5) == '.jpeg'
 
   data['embeds'][1]['title'] = pages.firstname .. " The user posted a new post!"
   data['embeds'][1]['image'] = { ['url'] = pages.image }

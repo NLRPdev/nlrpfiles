@@ -1,10 +1,11 @@
 ALTER TABLE `player_vehicles` ADD COLUMN `carseller` INT(11) NULL DEFAULT '0';
 
 CREATE TABLE IF NOT EXISTS `gksphone_app_chat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `channel` varchar(20) NOT NULL,
-  `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`sendcid` LONGTEXT NOT NULL COLLATE 'utf8_general_ci',
+	`channel` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`message` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
+	`time` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 

@@ -10,52 +10,48 @@ local inVehicle = false
 RegisterNUICallback('getCarsValetGKS', function(data)
 	if not wait then
 		local plate = data.plate
+		wait =  true
 		Config.Core.Functions.TriggerCallback('gksphone:loadVehicle', function(hash)
-			if Config.cdGarages then
-				if hash.impound == 1 then
-					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehimpounded'), img= '/html/static/img/icons/vale.png' })
-					return
-				elseif not hash.in_garage then
-					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehoutside'), img= '/html/static/img/icons/vale.png' })
-					return
-				end
-			else
-				if tonumber(hash.state) == 2 then
-					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehimpounded'), img= '/html/static/img/icons/vale.png' })
-					return
-				end
-			end
-			local gameVehicles = Config.Core.Functions.GetVehicles()
-			for i = 1, #gameVehicles do
-				local vehicle = gameVehicles[i]
-
-				if DoesEntityExist(vehicle) then
-					if GetVehicleNumberPlateText(vehicle) == data.plate then
-					local vehicleCoords = GetEntityCoords(vehicle)
-					SetNewWaypoint(vehicleCoords.x, vehicleCoords.y)
-					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_getr'), img= '/html/static/img/icons/vale.png' })
-					return
+			if hash ~= false then
+				if Config.cdGarages then
+					if hash.impound ~= 0 then
+						TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehimpounded'), img= '/html/static/img/icons/vale.png' })
+						wait = false
+						return
+					elseif not hash.in_garage then
+						TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehoutside'), img= '/html/static/img/icons/vale.png' })
+						wait = false
+						return
+					end
+				else
+					if tonumber(hash.state) == 2 then
+						TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_vehimpounded'), img= '/html/static/img/icons/vale.png' })
+						wait = false
+						return
 					end
 				end
-			end
-			Config.Core.Functions.TriggerCallback('gksphone:checkMoney2', function(hasEnoughMoney)
-				if hasEnoughMoney == true then
+				if hash == "nomoney" then
+					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_checmoney'), img= '/html/static/img/icons/vale.png' })
+					wait = false
+					return
+				else
 					TriggerServerEvent("gksphone:valet-car-set-outside", data.plate, hash.garage)
 					SpawnVehicle(hash, data.plate)
-				else
-					TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_checmoney'), img= '/html/static/img/icons/vale.png' })
 				end
-			end)
+			else
+				TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_getr'), img= '/html/static/img/icons/vale.png' })
+				wait = false
+			end
 
 		end,plate)
 	else
 		TriggerEvent('gksphone:notifi', {title = _U('vale_title'), message = _U('vale_coming'), img= '/html/static/img/icons/vale.png' })
+		wait = false
 	end
 end)
 
 
 function SpawnVehicle(vehicle, plate)
-	wait = true
 	if	Config.ValeNPC  then
 		local coords = GetEntityCoords(PlayerPedId())
 		local found, spawnPos, spawnHeading = GetClosestVehicleNodeWithHeading(coords.x + math.random(-Config.ValespawnRadius, Config.ValespawnRadius), coords.y + math.random(-Config.ValespawnRadius, Config.ValespawnRadius), coords.z, 0, 3, 0)
@@ -149,9 +145,9 @@ function TaskVehicle(vehicle, vehhash)
 		local plycoords = GetEntityCoords(fizzPed)
 		local dist = GetDistanceBetweenCoords(plycoords, pedcoords.x,pedcoords.y,pedcoords.z, false)
 
-		if dist <= 25.0 then
-			TaskVehicleDriveToCoord(fizzPed, vehicle, pedcoords.x, pedcoords.y, pedcoords.z, 60.0, 1, vehhash, 2883621, 5.0, 1)
-			SetVehicleFixed(vehicle)
+		if dist <= 40.0 then
+			TaskVehicleDriveToCoord(fizzPed, vehicle, pedcoords.x, pedcoords.y, pedcoords.z, 20.0, 1, vehhash, 786603, 5.0, 1)
+			SetVehicleFixed(vehicle)  
 			if dist <= 7.5 then
 				LeaveIt(vehicle)
 				break

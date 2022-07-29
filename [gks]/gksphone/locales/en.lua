@@ -25,7 +25,7 @@ Locales['en'] = {
 	-- Vale
 	["vale_get"] = "You bought your car for $",
 	["vale_gete"] = "You cannot use this tool as it is not in the car system files (Contact the official)",
-	["vale_getr"] = "Your Vehicle Is Already Away Marked On The Map.",
+	["vale_getr"] = "Valet is not available because your vehicle is outside",
     ["vale_checmoney"] = "There is not enough money in your bank for valet.",
     ["vale_spawntime"] = "Please wait, your vehicle is on the way",
     ["vale_outside"] = "Your car is not outside",
@@ -67,6 +67,8 @@ Locales['en'] = {
     ["bill_amounterror"] = "Must Be A Valid Amount Above 0",
     ["bill_cannotbill"] = "You Cannot Bill Yourself",
     ["bill_notplayer"] = "Player Not Online",
+
+    ["bill_invoicecancel"] = " your invoice has been  cancelled.",
 
 
     -- Carseller
@@ -144,6 +146,9 @@ Locales['en'] = {
     ["buss_hired"] = "You hired",
     ["buss_youhired"] = "You were hired as ",
 
+    ["buss_delbill"] = "Successfully canceled invoice",
+    ["buss_nodelbill"] = "The invoice could not be canceled. Billing information could not be found",
+    ["buss_gradenotbill"] = "Your business authorization is not sufficient to cancel an invoice.",
     -- qbit
     ["qbit_noplayer"] = "Player is not active",
 

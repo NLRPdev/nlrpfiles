@@ -27,7 +27,7 @@ Config.Core.Functions.CreateCallback('gksphone:gks:getCars', function(source, cb
                     if not result[i].in_garage then
                         VehicleState = "On The Street"
                     end
-                    if result[i].impound == 1 then
+                    if result[i].impound ~= 0 then
                         VehicleState = "Impounded"
                     end
                 elseif Config.loafGarages then
@@ -95,9 +95,15 @@ Config.Core.Functions.CreateCallback('gksphone:getSellerCar', function(source, c
     end)
 end)
 
-Config.Core.Functions.CreateCallback('gksphone:checkMoney2', function(source, cb)
-    local xPlayer = Config.Core.Functions.GetPlayer(source)
 
+Config.Core.Functions.CreateCallback('gksphone:loadVehicle', function(source, cb, plate)
+    for _, vehicle in pairs(GetAllVehicles()) do
+        if Config.Core.Shared.Trim(GetVehicleNumberPlateText(vehicle)) == plate then
+          cb(false)
+          return
+        end
+    end
+    local xPlayer = Config.Core.Functions.GetPlayer(source)
     if xPlayer.Functions.RemoveMoney('bank', Config.ValePrice, "vale") then
         TriggerClientEvent(Config.CoreNotify, source, _U('vale_get') .. Config.ValePrice)
         MySQL.Async.execute("INSERT INTO gksphone_bank_transfer (type, identifier, price, name) VALUES (@type, @identifier, @price, @name)", {
@@ -106,14 +112,20 @@ Config.Core.Functions.CreateCallback('gksphone:checkMoney2', function(source, cb
             ["@price"] = Config.ValePrice,
             ["@name"] = _U('vale_get') .. Config.ValePrice
         })
-        cb(true)
+        MySQL.Async.fetchAll("SELECT * FROM " .. Config.OwnedVehicles .. " WHERE plate = @cid", { ["@cid"] = plate }, function(d)
+            if d[1] ~= nil then
+                cb(d[1])
+                return
+            end
+        end)
     else
-        cb(false)
+        cb("nomoney")
+        return
     end
-
 end)
 
-Config.Core.Functions.CreateCallback('gksphone:loadVehicle', function(source, cb, plate)
+
+Config.Core.Functions.CreateCallback('gksphone:server:owndercarfetch', function(source, cb, plate)
     MySQL.Async.fetchAll("SELECT * FROM " .. Config.OwnedVehicles .. " WHERE plate = @cid", { ["@cid"] = plate }, function(d)
         if d[1] ~= nil then
             cb(d[1])

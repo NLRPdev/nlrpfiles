@@ -9,6 +9,7 @@
   "AirDrop": true,
   "RingtoneXsound": true,
   "JobMessageAnonymous": true,
+  "CurrencyComma" : false,
 
   "NewsPerm" : "News job code",
   "RaceIdentifier" : {
@@ -31,7 +32,7 @@
   "JobMessages": [
     {"label" : "PD", "jobname" : ["police", "sheriff", "#####"], "logoname": "police", "category": "police"},
     {"label" : "EMS", "jobname" : ["ambulance"], "logoname": "ambulance", "category": "ambulance"},
-    {"label" : "Mechanic", "jobname" : ["mechanic", "rc "], "logoname": "mechanic", "category": "mechanic"}
+    {"label" : "GKSHOP Mechanic", "jobname" : ["mechanic", "rc"], "logoname": "mechanic", "category": "mechanic"}
   ],
 
 
@@ -338,7 +339,7 @@
       "allowjob": [{
         "police": "police"
       }],
-      "show": true
+      "show": false
     },
     {
       "name": "House",

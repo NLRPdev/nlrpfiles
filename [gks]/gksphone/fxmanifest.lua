@@ -2,7 +2,7 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 description 'GKSPHONE'
-version '1.5.1'
+version '1.5.2'
 
 ui_page 'html/index.html'
 
@@ -44,7 +44,8 @@ client_script {
 	"client/valet.lua",
 	"client/client2.lua",
 	"client/clientAPI.lua",
-	"client/race.lua"
+	"client/race.lua",
+	"client/music.lua"
 }
 
 server_script {
@@ -88,7 +89,8 @@ escrow_ignore {
 	'client/prop.lua',
 	'client/valet.lua',
 	'client/photo.lua',
-	'client/clientAPI.lua'
+	'client/clientAPI.lua',
+	"client/music.lua"
 }
 
 dependency '/assetpacks'

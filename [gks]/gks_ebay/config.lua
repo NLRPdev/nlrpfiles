@@ -15,7 +15,7 @@ end
 
 Cfg.NPCEnable = true
 Cfg.NPCIdyenileehliyet	=  "g_f_y_vagos_01"
-Cfg.NPCKonummrpd	=   {  x = -268.08, y = 235.071, z = 90.57, h = 11 }
+Cfg.NPCKonummrpd	=   {  x = -267.80, y = 235.07, z = 90.5, h = 359.07 }
 Cfg.DrawDistance = 5
 Cfg.EyeTarget        = true                -- required qb-target
 
@@ -28,11 +28,11 @@ Config.BlacklistItem = {
 -- LANG
 
 Config.APPName = "Ebay"
-Config.Products = "Products"
+Config.Products = "Products you are selling"
 Config.Menu1Descript = "Products in the store"
-Config.Menu2Label = "Put product for sell"
+Config.Menu2Label = "Put product in warehouse"
 Config.Menu2Descript = "Adding products to the store"
-Config.Menu3Label = "Stored"
+Config.Menu3Label = "Pick up your orders"
 Config.MenuDescript = "Products in the warehouse"
 Config.TooMuch = "You entered too much"
 Config.AddProduct = "Add product"
