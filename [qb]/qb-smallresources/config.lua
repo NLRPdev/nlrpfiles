@@ -12,10 +12,10 @@ Config.DefaultPrice = 20 -- carwash
 Config.DirtLevel = 0.1 --carwash dirt level
 
 ConsumeablesEat = {
-    ["sandwich"] = math.random(35, 54),
-    ["tosti"] = math.random(40, 50),
-    ["twerks_candy"] = math.random(35, 54),
-    ["snikkel_candy"] = math.random(40, 50),
+    ["sandwich"] = math.random(10, 15),
+    ["tosti"] = math.random(10, 15),
+    ["twerks_candy"] = math.random(10, 15),
+    ["snikkel_candy"] = math.random(10, 15),
 }
 
 ConsumeablesDrink = {
