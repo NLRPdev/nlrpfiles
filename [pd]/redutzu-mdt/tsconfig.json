@@ -1,0 +1,16 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "baseUrl": "nui",
+        "sourceMap": true,
+        "target": "ES6",
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "module": "CommonJS",
+        "typeRoots": ["node_modules/@types"]
+    },
+    "include": ["nui/**/*", "dist"],
+    "exclude": ["node_modules", "dist"]
+}

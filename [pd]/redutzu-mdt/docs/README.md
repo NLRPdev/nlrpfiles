@@ -1,0 +1,1 @@
+https://docs.redutzu.works/resources/redutzu-mdt
