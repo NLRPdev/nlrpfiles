@@ -12,8 +12,8 @@ local Size = {
 -- Targets for these are in dui.lua
 local duiList = {
 	-- The exterior sign isn't just the logo, its the metal aswell, use this to make a new one for easy edits here: https://i.imgur.com/3GoamzI.png
-	["Exterior_Sign_Maldinis_d"] = { url = "https://i.imgur.com/3GoamzI.png", size = Size["medium"], texd = "sm_pizzeria_exterior_txd", },
-	["maldini-logo"] = { url = "https://i.imgur.com/AbHrNT8.png", size = Size["medium"], texd = "sm_pizzeria_txd_01", },
+	["Exterior_Sign_Maldinis_d"] = { url = "https://cdn.discordapp.com/attachments/999830675635064942/1003339383803482122/Chuck_E_Cheeze_2.png", size = Size["medium"], texd = "sm_pizzeria_exterior_txd", },
+	["maldini-logo"] = { url = "https://cdn.discordapp.com/attachments/999830675635064942/1003346744240767057/chuck_e_cheezes_1.png", size = Size["medium"], texd = "sm_pizzeria_txd_01", },
 	["pizzeria_dinks"] = { url = "https://i.imgur.com/XnibdXo.jpeg", size = Size["big"], texd = "sm_pizzeria_txd_02", },
 	["pizzeria_menu"] = { url = "https://i.imgur.com/8EXn5tX.jpeg", size = Size["big"], texd = "sm_pizzeria_txd_02", },
 }
